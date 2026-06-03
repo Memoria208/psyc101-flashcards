@@ -3,368 +3,368 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PSYC 101 — Chapter 1 Flashcards</title>
+<title>PSYC 101 Flashcards — CWI Summer 2026</title>
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+:root {
+  --bg: #f9f8f6;
+  --surface: #ffffff;
+  --surface2: #f1efe8;
+  --border: rgba(0,0,0,0.12);
+  --border2: rgba(0,0,0,0.22);
+  --text: #1a1a18;
+  --text2: #5f5e5a;
+  --text3: #888780;
+  --green: #0f6e56;
+  --green-bg: #e1f5ee;
+  --red: #993c1d;
+  --red-bg: #faece7;
+  --accent: #1d9e75;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
   :root {
-    --bg: #f9f8f6;
-    --surface: #ffffff;
-    --surface2: #f1efe8;
-    --border: rgba(0,0,0,0.12);
-    --border2: rgba(0,0,0,0.22);
-    --text: #1a1a18;
-    --text2: #5f5e5a;
+    --bg: #1c1c1a;
+    --surface: #2c2c2a;
+    --surface2: #383836;
+    --border: rgba(255,255,255,0.12);
+    --border2: rgba(255,255,255,0.22);
+    --text: #f0ede8;
+    --text2: #b4b2a9;
     --text3: #888780;
-    --green: #0f6e56;
-    --green-bg: #e1f5ee;
-    --red: #993c1d;
-    --red-bg: #faece7;
-    --accent: #1d9e75;
-    --radius-md: 8px;
-    --radius-lg: 12px;
-    --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    --green: #5dcaa5;
+    --green-bg: #085041;
+    --red: #f0997b;
+    --red-bg: #4a1b0c;
+    --accent: #5dcaa5;
   }
+}
 
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #1c1c1a;
-      --surface: #2c2c2a;
-      --surface2: #383836;
-      --border: rgba(255,255,255,0.12);
-      --border2: rgba(255,255,255,0.22);
-      --text: #f0ede8;
-      --text2: #b4b2a9;
-      --text3: #888780;
-      --green: #5dcaa5;
-      --green-bg: #085041;
-      --red: #f0997b;
-      --red-bg: #4a1b0c;
-      --accent: #5dcaa5;
-    }
-  }
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding: 2rem 1rem 4rem;
+}
 
-  body {
-    font-family: var(--font);
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    padding: 2rem 1rem;
-  }
+.wrap { max-width: 660px; margin: 0 auto; }
 
-  .wrap {
-    max-width: 660px;
-    margin: 0 auto;
-  }
+/* ── HOME SCREEN ── */
+#homeScreen { display: block; }
+#studyScreen { display: none; }
 
-  header {
-    margin-bottom: 2rem;
-  }
+.home-header { margin-bottom: 2rem; }
+.home-header h1 { font-size: 22px; font-weight: 500; margin-bottom: 4px; }
+.home-header p { font-size: 14px; color: var(--text2); }
 
-  header h1 {
-    font-size: 22px;
-    font-weight: 500;
-    color: var(--text);
-    margin-bottom: 4px;
-  }
+.section-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--text3);
+  margin-bottom: 10px;
+}
 
-  header p {
-    font-size: 14px;
-    color: var(--text2);
-  }
+.chapter-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 10px;
+  margin-bottom: 2rem;
+}
 
-  .filter-row {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    margin-bottom: 1.25rem;
-  }
+.chapter-card {
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1rem 1.1rem;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+  user-select: none;
+}
 
-  .chip {
-    padding: 5px 14px;
-    border-radius: 999px;
-    border: 0.5px solid var(--border2);
-    font-size: 12px;
-    cursor: pointer;
-    background: transparent;
-    color: var(--text2);
-    font-family: var(--font);
-    transition: all 0.15s;
-  }
+.chapter-card:hover { border-color: var(--border2); background: var(--surface2); }
+.chapter-card.selected { border: 2px solid var(--accent); background: var(--green-bg); }
 
-  .chip.active {
-    background: var(--surface2);
-    color: var(--text);
-    border-color: var(--border2);
-    font-weight: 500;
-  }
+.chapter-card .ch-num {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text3);
+  margin-bottom: 4px;
+}
 
-  .stats {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 1rem;
-  }
+.chapter-card .ch-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 4px;
+  line-height: 1.3;
+}
 
-  .stat {
-    background: var(--surface2);
-    border-radius: var(--radius-md);
-    padding: 10px 14px;
-    flex: 1;
-    text-align: center;
-  }
+.chapter-card .ch-count {
+  font-size: 12px;
+  color: var(--text3);
+}
 
-  .stat-num {
-    font-size: 20px;
-    font-weight: 500;
-    color: var(--text);
-  }
+.chapter-card.coming-soon {
+  opacity: 0.45;
+  cursor: default;
+  pointer-events: none;
+}
 
-  .stat-num.green { color: var(--green); }
-  .stat-num.red { color: var(--red); }
+.multi-controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
 
-  .stat-label {
-    font-size: 11px;
-    color: var(--text3);
-    margin-top: 2px;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-  }
+.btn-outline {
+  padding: 8px 16px;
+  border-radius: var(--radius-md);
+  border: 0.5px solid var(--border2);
+  background: transparent;
+  color: var(--text2);
+  font-size: 13px;
+  cursor: pointer;
+  font-family: var(--font);
+  transition: background 0.15s;
+}
+.btn-outline:hover { background: var(--surface2); color: var(--text); }
 
-  .progress-wrap {
-    background: var(--surface2);
-    border-radius: 999px;
-    height: 6px;
-    margin-bottom: 1.25rem;
-    overflow: hidden;
-  }
+.btn-start {
+  display: block;
+  width: 100%;
+  padding: 13px;
+  border-radius: var(--radius-md);
+  border: none;
+  background: var(--accent);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: var(--font);
+  transition: opacity 0.15s;
+  margin-bottom: 2rem;
+}
+.btn-start:disabled { opacity: 0.35; cursor: default; }
+.btn-start:not(:disabled):hover { opacity: 0.88; }
 
-  .progress-fill {
-    height: 100%;
-    background: var(--accent);
-    border-radius: 999px;
-    transition: width 0.4s ease;
-    width: 0%;
-  }
+/* ── STUDY SCREEN ── */
+.study-topbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 1.5rem;
+}
 
-  .card-scene {
-    perspective: 1000px;
-    height: 220px;
-    margin-bottom: 1.25rem;
-    cursor: pointer;
-  }
+.btn-back {
+  border: 0.5px solid var(--border2);
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--text2);
+  width: 34px;
+  height: 34px;
+  cursor: pointer;
+  font-size: 18px;
+  font-family: var(--font);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.btn-back:hover { background: var(--surface2); }
 
-  .card-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    transform-style: preserve-3d;
-    transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
-  }
+.study-title { font-size: 16px; font-weight: 500; color: var(--text); }
+.study-subtitle { font-size: 12px; color: var(--text3); margin-top: 2px; }
 
-  .card-scene.flipped .card-inner {
-    transform: rotateY(180deg);
-  }
+/* filter chips */
+.filter-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.25rem; }
+.chip {
+  padding: 5px 14px;
+  border-radius: 999px;
+  border: 0.5px solid var(--border2);
+  font-size: 12px;
+  cursor: pointer;
+  background: transparent;
+  color: var(--text2);
+  font-family: var(--font);
+  transition: all 0.15s;
+}
+.chip.active { background: var(--surface2); color: var(--text); border-color: var(--border2); font-weight: 500; }
 
-  .card-face {
-    position: absolute;
-    inset: 0;
-    backface-visibility: hidden;
-    border-radius: var(--radius-lg);
-    border: 0.5px solid var(--border);
-    padding: 1.75rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
+/* stats */
+.stats { display: flex; gap: 12px; margin-bottom: 1rem; }
+.stat { background: var(--surface2); border-radius: var(--radius-md); padding: 10px 14px; flex: 1; text-align: center; }
+.stat-num { font-size: 20px; font-weight: 500; color: var(--text); }
+.stat-num.green { color: var(--green); }
+.stat-num.red { color: var(--red); }
+.stat-label { font-size: 11px; color: var(--text3); margin-top: 2px; text-transform: uppercase; letter-spacing: 0.04em; }
 
-  .card-front { background: var(--surface); }
-  .card-back {
-    background: var(--surface2);
-    transform: rotateY(180deg);
-  }
+.progress-wrap { background: var(--surface2); border-radius: 999px; height: 6px; margin-bottom: 1.25rem; overflow: hidden; }
+.progress-fill { height: 100%; background: var(--accent); border-radius: 999px; transition: width 0.4s ease; width: 0%; }
 
-  .card-tag {
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--text3);
-    margin-bottom: 12px;
-  }
+/* flashcard */
+.card-scene {
+  perspective: 1000px;
+  height: 220px;
+  margin-bottom: 1.25rem;
+  cursor: pointer;
+}
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+}
+.card-scene.flipped .card-inner { transform: rotateY(180deg); }
+.card-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: var(--radius-lg);
+  border: 0.5px solid var(--border);
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.card-front { background: var(--surface); }
+.card-back { background: var(--surface2); transform: rotateY(180deg); }
+.card-badge {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text3);
+  margin-bottom: 10px;
+}
+.card-term { font-size: 22px; font-weight: 500; color: var(--text); line-height: 1.35; }
+.card-def { font-size: 14px; color: var(--text2); line-height: 1.7; }
+.card-hint { font-size: 12px; color: var(--text3); margin-top: 1.25rem; }
 
-  .card-term {
-    font-size: 22px;
-    font-weight: 500;
-    color: var(--text);
-    line-height: 1.35;
-  }
+/* actions */
+.actions { display: flex; gap: 10px; margin-bottom: 1.25rem; }
+.btn {
+  flex: 1;
+  padding: 10px 0;
+  border-radius: var(--radius-md);
+  border: 0.5px solid var(--border2);
+  background: transparent;
+  color: var(--text);
+  font-size: 14px;
+  cursor: pointer;
+  font-family: var(--font);
+  transition: background 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.btn:hover { background: var(--surface2); }
+.btn:active { transform: scale(0.98); }
+.btn-know { border-color: var(--green); color: var(--green); }
+.btn-know:hover { background: var(--green-bg); }
+.btn-again { border-color: var(--red); color: var(--red); }
+.btn-again:hover { background: var(--red-bg); }
 
-  .card-def {
-    font-size: 14px;
-    color: var(--text2);
-    line-height: 1.7;
-  }
+/* nav */
+.nav { display: flex; gap: 10px; align-items: center; justify-content: center; margin-bottom: 2rem; }
+.nav-btn {
+  border: 0.5px solid var(--border2);
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--text2);
+  width: 36px; height: 36px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-family: var(--font);
+  transition: background 0.15s;
+}
+.nav-btn:hover { background: var(--surface2); }
+.nav-counter { font-size: 14px; color: var(--text2); min-width: 80px; text-align: center; }
 
-  .card-hint {
-    font-size: 12px;
-    color: var(--text3);
-    margin-top: 1.25rem;
-  }
+/* complete */
+.complete { text-align: center; padding: 2.5rem 1rem; display: none; }
+.complete .emoji { font-size: 40px; margin-bottom: 12px; }
+.complete h2 { font-size: 20px; font-weight: 500; margin-bottom: 8px; }
+.complete p { font-size: 14px; color: var(--text2); margin-bottom: 1.5rem; }
+.btn-restart {
+  padding: 10px 28px;
+  border-radius: var(--radius-md);
+  border: 0.5px solid var(--border2);
+  background: transparent;
+  color: var(--text);
+  font-size: 14px;
+  cursor: pointer;
+  font-family: var(--font);
+}
+.btn-restart:hover { background: var(--surface2); }
 
-  .actions {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 1.25rem;
-  }
-
-  .btn {
-    flex: 1;
-    padding: 10px 0;
-    border-radius: var(--radius-md);
-    border: 0.5px solid var(--border2);
-    background: transparent;
-    color: var(--text);
-    font-size: 14px;
-    cursor: pointer;
-    font-family: var(--font);
-    transition: background 0.15s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-  }
-
-  .btn:hover { background: var(--surface2); }
-  .btn:active { transform: scale(0.98); }
-
-  .btn-know {
-    border-color: var(--green);
-    color: var(--green);
-  }
-
-  .btn-know:hover { background: var(--green-bg); }
-
-  .btn-again {
-    border-color: var(--red);
-    color: var(--red);
-  }
-
-  .btn-again:hover { background: var(--red-bg); }
-
-  .nav {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 2rem;
-  }
-
-  .nav-btn {
-    border: 0.5px solid var(--border2);
-    border-radius: var(--radius-md);
-    background: transparent;
-    color: var(--text2);
-    width: 36px;
-    height: 36px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    font-family: var(--font);
-    transition: background 0.15s;
-  }
-
-  .nav-btn:hover { background: var(--surface2); }
-
-  .nav-counter {
-    font-size: 14px;
-    color: var(--text2);
-    min-width: 80px;
-    text-align: center;
-  }
-
-  .complete {
-    text-align: center;
-    padding: 2.5rem 1rem;
-    display: none;
-  }
-
-  .complete .emoji { font-size: 40px; margin-bottom: 12px; }
-
-  .complete h2 {
-    font-size: 20px;
-    font-weight: 500;
-    margin-bottom: 8px;
-  }
-
-  .complete p {
-    font-size: 14px;
-    color: var(--text2);
-    margin-bottom: 1.5rem;
-  }
-
-  .btn-restart {
-    padding: 10px 28px;
-    border-radius: var(--radius-md);
-    border: 0.5px solid var(--border2);
-    background: transparent;
-    color: var(--text);
-    font-size: 14px;
-    cursor: pointer;
-    font-family: var(--font);
-  }
-
-  .btn-restart:hover { background: var(--surface2); }
-
-  footer {
-    text-align: center;
-    font-size: 12px;
-    color: var(--text3);
-    margin-top: 2rem;
-    padding-top: 1.5rem;
-    border-top: 0.5px solid var(--border);
-  }
-
-  /* Chapter badge colors */
-  .badge {
-    display: inline-block;
-    padding: 3px 10px;
-    border-radius: 999px;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.04em;
-    margin-bottom: 10px;
-  }
-
-  .badge-def    { background: #e6f1fb; color: #185fa5; }
-  .badge-core   { background: #e1f5ee; color: #0f6e56; }
-  .badge-method { background: #eeedfe; color: #534ab7; }
-  .badge-bias   { background: #faece7; color: #993c1d; }
-  .badge-ethics { background: #faeeda; color: #854f0b; }
-  .badge-hist   { background: #f1efe8; color: #5f5e5a; }
-  .badge-study  { background: #fbeaf0; color: #993556; }
-
-  @media (prefers-color-scheme: dark) {
-    .badge-def    { background: #0c447c; color: #85b7eb; }
-    .badge-core   { background: #085041; color: #5dcaa5; }
-    .badge-method { background: #3c3489; color: #afa9ec; }
-    .badge-bias   { background: #4a1b0c; color: #f0997b; }
-    .badge-ethics { background: #633806; color: #ef9f27; }
-    .badge-hist   { background: #2c2c2a; color: #b4b2a9; }
-    .badge-study  { background: #4b1528; color: #ed93b1; }
-  }
+footer {
+  text-align: center;
+  font-size: 12px;
+  color: var(--text3);
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 0.5px solid var(--border);
+}
 </style>
 </head>
 <body>
 <div class="wrap">
 
-  <header>
-    <h1>PSYC 101 — Chapter 1 Flashcards</h1>
-    <p>College of Western Idaho · Myers &amp; DeWall, <em>Psychology in Everyday Life</em> (6th ed.) · Tap a card to flip it</p>
-  </header>
+<!-- ═══════════════════════════════════════════
+     HOME SCREEN
+════════════════════════════════════════════ -->
+<div id="homeScreen">
+  <div class="home-header">
+    <h1>PSYC 101 Flashcards</h1>
+    <p>College of Western Idaho · Summer 2026 · Myers &amp; DeWall, 6th ed.</p>
+  </div>
+
+  <div class="section-label">Select chapters to study</div>
+
+  <div class="chapter-grid" id="chapterGrid"></div>
+
+  <div class="multi-controls">
+    <button class="btn-outline" onclick="selectAll()">Select all available</button>
+    <button class="btn-outline" onclick="clearAll()">Clear selection</button>
+  </div>
+
+  <button class="btn-start" id="startBtn" onclick="startStudy()" disabled>
+    Start flashcards
+  </button>
+
+  <footer>
+    Built from Myers &amp; DeWall, <em>Psychology in Everyday Life</em>, 6th ed. (2023) &middot; For personal study use
+  </footer>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     STUDY SCREEN
+════════════════════════════════════════════ -->
+<div id="studyScreen">
+  <div class="study-topbar">
+    <button class="btn-back" onclick="goHome()" title="Back to chapters">&#8592;</button>
+    <div>
+      <div class="study-title" id="studyTitle"></div>
+      <div class="study-subtitle" id="studySubtitle"></div>
+    </div>
+  </div>
 
   <div class="filter-row" id="filterRow"></div>
 
@@ -377,14 +377,14 @@
   <div class="progress-wrap"><div class="progress-fill" id="progressBar"></div></div>
 
   <div class="card-scene" id="cardScene" onclick="flipCard()">
-    <div class="card-inner" id="cardInner">
+    <div class="card-inner">
       <div class="card-face card-front">
-        <div id="badgeFront" class="badge"></div>
+        <div class="card-badge" id="cardBadge"></div>
         <div class="card-term" id="cardTerm"></div>
         <div class="card-hint">tap to reveal definition</div>
       </div>
       <div class="card-face card-back">
-        <div class="badge badge-def">Definition</div>
+        <div class="card-badge" id="cardChapter"></div>
         <div class="card-def" id="cardDef"></div>
       </div>
     </div>
@@ -396,9 +396,9 @@
   </div>
 
   <div class="nav">
-    <button class="nav-btn" onclick="prevCard()" title="Previous">&#8592;</button>
-    <div class="nav-counter" id="navCounter">1 / 44</div>
-    <button class="nav-btn" onclick="nextCard()" title="Next">&#8594;</button>
+    <button class="nav-btn" onclick="prevCard()">&#8592;</button>
+    <div class="nav-counter" id="navCounter">1 / 0</div>
+    <button class="nav-btn" onclick="nextCard()">&#8594;</button>
   </div>
 
   <div class="complete" id="complete">
@@ -406,111 +406,228 @@
     <h2>Deck complete!</h2>
     <p id="completeDetail"></p>
     <button class="btn-restart" onclick="restartDeck()">Study again</button>
+    &nbsp;
+    <button class="btn-restart" onclick="goHome()">Choose chapters</button>
   </div>
-
-  <footer>
-    Built from Myers &amp; DeWall, <em>Psychology in Everyday Life</em>, 6th ed. (2023) · PSYC 101 Summer 2026, CWI · For personal study use
-  </footer>
 </div>
 
 <script>
-const BADGE_CLASS = {
-  "Definition":      "badge-def",
-  "Core concept":    "badge-core",
-  "Research method": "badge-method",
-  "Bias/Error":      "badge-bias",
-  "Ethics":          "badge-ethics",
-  "History":         "badge-hist",
-  "Study skills":    "badge-study",
-};
-
-const ALL_CARDS = [
-  { term: "Psychology", def: "The scientific study of behavior and mental processes — how we act, think, and feel.", tag: "Definition" },
-  { term: "Scientific attitude", def: "The combination of curiosity, skepticism, and humility that underlies rigorous scientific inquiry.", tag: "Core concept" },
-  { term: "Critical thinking", def: "Thinking that does not blindly accept arguments and conclusions; it examines assumptions, evaluates evidence, and considers alternative explanations.", tag: "Core concept" },
-  { term: "Hindsight bias", def: "The tendency to believe, after learning an outcome, that we would have predicted it — the 'I knew it all along' phenomenon.", tag: "Bias/Error" },
-  { term: "Theory", def: "An explanation that uses ideas and principles to organize observations and predict behaviors or events.", tag: "Research method" },
-  { term: "Hypothesis", def: "A testable prediction derived from a theory; specifies what results would support or contradict the theory.", tag: "Research method" },
-  { term: "Operational definition", def: "A precise, measurable statement of the procedures used to define research variables (e.g., 'sleep-deprived = 2+ fewer hours than normal').", tag: "Research method" },
-  { term: "Replication", def: "Repeating a study with different participants to confirm whether the original findings can be reproduced.", tag: "Research method" },
-  { term: "Preregistration", def: "Publicly posting a study's hypotheses and methods before collecting data, to prevent later changing of hypotheses to fit results.", tag: "Research method" },
-  { term: "Case study", def: "An in-depth analysis of one individual or group; reveals possibilities but may not generalize to all people.", tag: "Research method" },
-  { term: "Naturalistic observation", def: "Watching and recording behavior in naturally occurring situations without manipulation or control.", tag: "Research method" },
-  { term: "Survey", def: "A method of gathering self-reported data from a large sample via questions about behaviors or opinions.", tag: "Research method" },
-  { term: "Random sample", def: "A sample in which every person in the population has an equal chance of being included, allowing results to generalize.", tag: "Research method" },
-  { term: "Correlation", def: "A statistical relationship between two variables; shows how well one predicts the other but does not prove causation.", tag: "Research method" },
-  { term: "Experiment", def: "A study that manipulates one or more independent variables under controlled conditions to discover cause and effect.", tag: "Research method" },
-  { term: "Independent variable", def: "The factor that is manipulated by the researcher in an experiment.", tag: "Research method" },
-  { term: "Dependent variable", def: "The outcome that is measured in an experiment; it depends on the independent variable.", tag: "Research method" },
-  { term: "Control group", def: "Participants in an experiment who are not exposed to the treatment; they provide a baseline for comparison.", tag: "Research method" },
-  { term: "Experimental group", def: "Participants in an experiment who are exposed to the treatment (the independent variable).", tag: "Research method" },
-  { term: "Random assignment", def: "Assigning participants to experimental and control groups by chance, reducing the effect of confounding variables.", tag: "Research method" },
-  { term: "Confounding variable", def: "A factor other than the independent variable that might produce an effect; must be controlled in experiments.", tag: "Research method" },
-  { term: "Double-blind procedure", def: "An experimental design in which neither participants nor researchers know who received the treatment, reducing bias.", tag: "Research method" },
-  { term: "Placebo effect", def: "A result caused by expectations alone rather than by the actual treatment.", tag: "Research method" },
-  { term: "Informed consent", def: "An ethical requirement that participants know enough about a study to decide whether to participate.", tag: "Ethics" },
-  { term: "Debriefing", def: "Explaining to participants the full purpose of a study after it is completed, including any deception used.", tag: "Ethics" },
-  { term: "Peer reviewers", def: "Scientists who evaluate a study's theory, originality, and accuracy before it is published in a scientific journal.", tag: "Ethics" },
-  { term: "Structuralism", def: "An early psychological school that used introspection to explore the elemental structure of the human mind (Wundt's approach).", tag: "History" },
-  { term: "Functionalism", def: "An early school influenced by William James and Darwin that focused on how mental and behavioral processes help an organism adapt.", tag: "History" },
-  { term: "Behaviorism", def: "The view that psychology should study only observable, measurable behavior — not inner mental states.", tag: "History" },
-  { term: "Humanistic psychology", def: "A school that emphasized growth, potential, and the importance of love and acceptance in shaping behavior.", tag: "History" },
-  { term: "Cognitive psychology", def: "The scientific study of mental processes — thinking, knowing, remembering, and communicating.", tag: "History" },
-  { term: "Cognitive neuroscience", def: "An interdisciplinary field that studies the brain activity underlying mental processes.", tag: "History" },
-  { term: "Wilhelm Wundt", def: "Founded the first psychological laboratory in 1879 at Leipzig, Germany; conducted psychology's first experiment measuring reaction time.", tag: "History" },
-  { term: "Mary Whiton Calkins", def: "Outscored all male students on Harvard PhD exams yet was denied the degree; became the first female APA president in 1905.", tag: "History" },
-  { term: "Margaret Floy Washburn", def: "First woman to officially receive a psychology PhD; helped found animal behavior research; became second female APA president in 1921.", tag: "History" },
-  { term: "Biopsychosocial approach", def: "An integrated perspective that considers biological, psychological, and social-cultural factors to understand behavior.", tag: "Core concept" },
-  { term: "Nature–nurture issue", def: "The longstanding debate over the relative contributions of genes (nature) and experience or environment (nurture) to behavior.", tag: "Core concept" },
-  { term: "Dual processing", def: "The principle that much information is processed simultaneously on conscious (explicit) and unconscious (implicit) tracks.", tag: "Core concept" },
-  { term: "Positive psychology", def: "The scientific study of human flourishing — focusing on strengths, virtues, and factors that allow individuals and communities to thrive.", tag: "Core concept" },
-  { term: "Testing effect", def: "Enhanced memory and learning that results from being tested or retrieving information, rather than from simply rereading.", tag: "Study skills" },
-  { term: "SQ3R", def: "A five-step study method: Survey, Question, Read, Retrieve, Review — applies memory research to improve retention.", tag: "Study skills" },
-  { term: "Psychiatry", def: "A medical specialty that diagnoses and treats mental disorders; psychiatrists are medical doctors who can prescribe medication.", tag: "Definition" },
-  { term: "Clinical psychology", def: "A branch of psychology that assesses and treats mental, emotional, and behavioral disorders.", tag: "Definition" },
-  { term: "Community psychology", def: "A branch that studies how people interact with social environments and focuses on social problems and prevention.", tag: "Definition" },
+/* ═══════════════════════════════════════════
+   DATA — add new chapters below as the
+   semester progresses. Each chapter is an
+   object with: id, num, title, cards[].
+   Cards have: term, def, tag.
+════════════════════════════════════════════ */
+const CHAPTERS = [
+  {
+    id: "ch1",
+    num: "Chapter 1",
+    title: "Psychology's Roots, Critical Thinking & Self-Improvement",
+    cards: [
+      { term: "Psychology", def: "The scientific study of behavior and mental processes — how we act, think, and feel.", tag: "Definition" },
+      { term: "Scientific attitude", def: "The combination of curiosity, skepticism, and humility that underlies rigorous scientific inquiry.", tag: "Core concept" },
+      { term: "Critical thinking", def: "Thinking that does not blindly accept arguments and conclusions; examines assumptions, evaluates evidence, and considers alternative explanations.", tag: "Core concept" },
+      { term: "Hindsight bias", def: "The tendency to believe, after learning an outcome, that we would have predicted it — the 'I knew it all along' phenomenon.", tag: "Bias/Error" },
+      { term: "Theory", def: "An explanation that uses ideas and principles to organize observations and predict behaviors or events.", tag: "Research method" },
+      { term: "Hypothesis", def: "A testable prediction derived from a theory; specifies what results would support or contradict the theory.", tag: "Research method" },
+      { term: "Operational definition", def: "A precise, measurable statement of the procedures used to define research variables (e.g., 'sleep-deprived = 2+ fewer hours than normal').", tag: "Research method" },
+      { term: "Replication", def: "Repeating a study with different participants to confirm whether the original findings can be reproduced.", tag: "Research method" },
+      { term: "Preregistration", def: "Publicly posting a study's hypotheses and methods before collecting data, to prevent later changing of hypotheses to fit results.", tag: "Research method" },
+      { term: "Case study", def: "An in-depth analysis of one individual or group; reveals possibilities but may not generalize to all people.", tag: "Research method" },
+      { term: "Naturalistic observation", def: "Watching and recording behavior in naturally occurring situations without manipulation or control.", tag: "Research method" },
+      { term: "Survey", def: "A method of gathering self-reported data from a large sample via questions about behaviors or opinions.", tag: "Research method" },
+      { term: "Random sample", def: "A sample in which every person in the population has an equal chance of being included, allowing results to generalize.", tag: "Research method" },
+      { term: "Correlation", def: "A statistical relationship between two variables; shows how well one predicts the other but does not prove causation.", tag: "Research method" },
+      { term: "Experiment", def: "A study that manipulates one or more independent variables under controlled conditions to discover cause and effect.", tag: "Research method" },
+      { term: "Independent variable", def: "The factor that is manipulated by the researcher in an experiment.", tag: "Research method" },
+      { term: "Dependent variable", def: "The outcome that is measured in an experiment; it depends on the independent variable.", tag: "Research method" },
+      { term: "Control group", def: "Participants in an experiment who are not exposed to the treatment; they provide a baseline for comparison.", tag: "Research method" },
+      { term: "Experimental group", def: "Participants in an experiment who are exposed to the treatment (the independent variable).", tag: "Research method" },
+      { term: "Random assignment", def: "Assigning participants to experimental and control groups by chance, reducing the effect of confounding variables.", tag: "Research method" },
+      { term: "Confounding variable", def: "A factor other than the independent variable that might produce an effect; must be controlled in experiments.", tag: "Research method" },
+      { term: "Double-blind procedure", def: "An experimental design in which neither participants nor researchers know who received the treatment, reducing bias.", tag: "Research method" },
+      { term: "Placebo effect", def: "A result caused by expectations alone rather than by the actual treatment.", tag: "Research method" },
+      { term: "Informed consent", def: "An ethical requirement that participants know enough about a study to decide whether to participate.", tag: "Ethics" },
+      { term: "Debriefing", def: "Explaining to participants the full purpose of a study after it is completed, including any deception used.", tag: "Ethics" },
+      { term: "Peer reviewers", def: "Scientists who evaluate a study's theory, originality, and accuracy before it is published in a scientific journal.", tag: "Ethics" },
+      { term: "Structuralism", def: "An early psychological school that used introspection to explore the elemental structure of the human mind (Wundt's approach).", tag: "History" },
+      { term: "Functionalism", def: "An early school influenced by William James and Darwin that focused on how mental and behavioral processes help an organism adapt.", tag: "History" },
+      { term: "Behaviorism", def: "The view that psychology should study only observable, measurable behavior — not inner mental states.", tag: "History" },
+      { term: "Humanistic psychology", def: "A school that emphasized growth, potential, and the importance of love and acceptance in shaping behavior.", tag: "History" },
+      { term: "Cognitive psychology", def: "The scientific study of mental processes — thinking, knowing, remembering, and communicating.", tag: "History" },
+      { term: "Cognitive neuroscience", def: "An interdisciplinary field that studies the brain activity underlying mental processes.", tag: "History" },
+      { term: "Wilhelm Wundt", def: "Founded the first psychological laboratory in 1879 at Leipzig, Germany; conducted psychology's first experiment measuring reaction time.", tag: "History" },
+      { term: "Mary Whiton Calkins", def: "Outscored all male students on Harvard PhD exams yet was denied the degree; became the first female APA president in 1905.", tag: "History" },
+      { term: "Margaret Floy Washburn", def: "First woman to officially receive a psychology PhD; helped found animal behavior research; became second female APA president in 1921.", tag: "History" },
+      { term: "Biopsychosocial approach", def: "An integrated perspective that considers biological, psychological, and social-cultural factors to understand behavior.", tag: "Core concept" },
+      { term: "Nature–nurture issue", def: "The longstanding debate over the relative contributions of genes (nature) and experience or environment (nurture) to behavior.", tag: "Core concept" },
+      { term: "Dual processing", def: "The principle that much information is processed simultaneously on conscious (explicit) and unconscious (implicit) tracks.", tag: "Core concept" },
+      { term: "Positive psychology", def: "The scientific study of human flourishing — focusing on strengths, virtues, and factors that allow individuals and communities to thrive.", tag: "Core concept" },
+      { term: "Testing effect", def: "Enhanced memory and learning that results from being tested or retrieving information, rather than from simply rereading.", tag: "Study skills" },
+      { term: "SQ3R", def: "A five-step study method: Survey, Question, Read, Retrieve, Review — applies memory research to improve retention.", tag: "Study skills" },
+      { term: "Psychiatry", def: "A medical specialty that diagnoses and treats mental disorders; psychiatrists are medical doctors who can prescribe medication.", tag: "Definition" },
+      { term: "Clinical psychology", def: "A branch of psychology that assesses and treats mental, emotional, and behavioral disorders.", tag: "Definition" },
+      { term: "Community psychology", def: "A branch that studies how people interact with social environments and focuses on social problems and prevention.", tag: "Definition" },
+    ]
+  },
+  /* ── FUTURE CHAPTERS: paste new chapter objects here ── */
+  { id: "ch2", num: "Chapter 2", title: "The Biology of Mind", cards: [], coming: true },
+  { id: "ch3", num: "Chapter 3", title: "Consciousness & the Two-Track Mind", cards: [], coming: true },
+  { id: "ch5", num: "Chapter 5", title: "Developing Through the Life Span", cards: [], coming: true },
+  { id: "ch6", num: "Chapter 6", title: "Sensation & Perception", cards: [], coming: true },
+  { id: "ch7", num: "Chapter 7", title: "Learning", cards: [], coming: true },
+  { id: "ch8", num: "Chapter 8", title: "Memory", cards: [], coming: true },
+  { id: "ch9", num: "Chapter 9", title: "Thinking, Language & Intelligence", cards: [], coming: true },
+  { id: "ch10", num: "Chapter 10", title: "Motivation & Emotion", cards: [], coming: true },
+  { id: "ch11", num: "Chapter 11", title: "Social Psychology", cards: [], coming: true },
+  { id: "ch12", num: "Chapter 12", title: "Personality", cards: [], coming: true },
+  { id: "ch13", num: "Chapter 13", title: "Psychological Disorders", cards: [], coming: true },
+  { id: "ch14", num: "Chapter 14", title: "Therapy", cards: [], coming: true },
 ];
 
-const TAGS = ["All", ...Array.from(new Set(ALL_CARDS.map(c => c.tag)))];
-let deck = [...ALL_CARDS];
+/* ═══════════════════════════════════════════
+   STATE
+════════════════════════════════════════════ */
+let selected = new Set();
+let deck = [];
+let filteredDeck = [];
 let idx = 0;
 let flipped = false;
 let known = new Set();
 let again = new Set();
 let activeTag = "All";
 
-function buildFilters() {
+/* ═══════════════════════════════════════════
+   HOME SCREEN
+════════════════════════════════════════════ */
+function buildHome() {
+  const grid = document.getElementById("chapterGrid");
+  grid.innerHTML = "";
+  CHAPTERS.forEach(ch => {
+    const div = document.createElement("div");
+    div.className = "chapter-card" + (ch.coming ? " coming-soon" : "") + (selected.has(ch.id) ? " selected" : "");
+    div.innerHTML = `
+      <div class="ch-num">${ch.num}</div>
+      <div class="ch-title">${ch.title}</div>
+      <div class="ch-count">${ch.coming ? "Coming soon" : ch.cards.length + " cards"}</div>
+    `;
+    if (!ch.coming) div.onclick = () => toggleChapter(ch.id, div);
+    grid.appendChild(div);
+  });
+  updateStartBtn();
+}
+
+function toggleChapter(id, el) {
+  if (selected.has(id)) { selected.delete(id); el.classList.remove("selected"); }
+  else { selected.add(id); el.classList.add("selected"); }
+  updateStartBtn();
+}
+
+function selectAll() {
+  CHAPTERS.filter(c => !c.coming).forEach(c => selected.add(c.id));
+  buildHome();
+}
+
+function clearAll() {
+  selected.clear();
+  buildHome();
+}
+
+function updateStartBtn() {
+  const btn = document.getElementById("startBtn");
+  const total = [...selected].reduce((n, id) => {
+    const ch = CHAPTERS.find(c => c.id === id);
+    return n + (ch ? ch.cards.length : 0);
+  }, 0);
+  btn.disabled = total === 0;
+  btn.textContent = total === 0
+    ? "Select at least one chapter"
+    : "Start flashcards (" + total + " cards)";
+}
+
+function startStudy() {
+  const chs = CHAPTERS.filter(c => selected.has(c.id));
+  deck = chs.flatMap(ch => ch.cards.map(card => ({ ...card, chapter: ch.num })));
+  shuffle(deck);
+
+  const isMulti = chs.length > 1;
+  document.getElementById("studyTitle").textContent = isMulti
+    ? chs.map(c => c.num).join(" + ")
+    : chs[0].num + " — " + chs[0].title;
+  document.getElementById("studySubtitle").textContent = deck.length + " cards";
+
+  known.clear(); again.clear();
+  idx = 0; flipped = false; activeTag = "All";
+
+  buildTagFilter(isMulti);
+  applyFilter();
+
+  document.getElementById("homeScreen").style.display = "none";
+  document.getElementById("studyScreen").style.display = "block";
+  document.getElementById("complete").style.display = "none";
+  document.getElementById("cardScene").style.display = "block";
+  document.getElementById("actions").style.display = "none";
+}
+
+function goHome() {
+  document.getElementById("homeScreen").style.display = "block";
+  document.getElementById("studyScreen").style.display = "none";
+  buildHome();
+}
+
+/* ═══════════════════════════════════════════
+   STUDY SCREEN — TAG FILTER
+════════════════════════════════════════════ */
+function buildTagFilter(showChapterFilter) {
   const row = document.getElementById("filterRow");
-  TAGS.forEach(t => {
+  row.innerHTML = "";
+  const tags = ["All", ...Array.from(new Set(deck.map(c => c.tag)))];
+  if (showChapterFilter) {
+    const chTags = [...selected].map(id => CHAPTERS.find(c => c.id === id).num);
+    tags.push(...chTags);
+  }
+  tags.forEach(t => {
     const btn = document.createElement("button");
     btn.className = "chip" + (t === "All" ? " active" : "");
     btn.textContent = t;
-    btn.onclick = () => setFilter(t, btn);
+    btn.onclick = () => {
+      activeTag = t;
+      document.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
+      btn.classList.add("active");
+      applyFilter();
+    };
     row.appendChild(btn);
   });
 }
 
-function setFilter(tag, el) {
-  activeTag = tag;
-  document.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
-  el.classList.add("active");
-  deck = tag === "All" ? [...ALL_CARDS] : ALL_CARDS.filter(c => c.tag === tag);
-  known = new Set(); again = new Set();
+function applyFilter() {
+  if (activeTag === "All") {
+    filteredDeck = [...deck];
+  } else if (activeTag.startsWith("Chapter")) {
+    filteredDeck = deck.filter(c => c.chapter === activeTag);
+  } else {
+    filteredDeck = deck.filter(c => c.tag === activeTag);
+  }
+  known.clear(); again.clear();
   idx = 0; flipped = false;
   document.getElementById("complete").style.display = "none";
   document.getElementById("cardScene").style.display = "block";
+  document.getElementById("actions").style.display = "none";
   render();
 }
 
+/* ═══════════════════════════════════════════
+   STUDY SCREEN — CARD LOGIC
+════════════════════════════════════════════ */
 function render() {
-  if (idx >= deck.length) { showComplete(); return; }
-  const card = deck[idx];
-  document.getElementById("navCounter").textContent = (idx + 1) + " / " + deck.length;
+  if (filteredDeck.length === 0) { showComplete(); return; }
+  if (idx >= filteredDeck.length) { showComplete(); return; }
+  const card = filteredDeck[idx];
+  document.getElementById("navCounter").textContent = (idx + 1) + " / " + filteredDeck.length;
   document.getElementById("cardTerm").textContent = card.term;
   document.getElementById("cardDef").textContent = card.def;
-  const badge = document.getElementById("badgeFront");
-  badge.textContent = card.tag;
-  badge.className = "badge " + (BADGE_CLASS[card.tag] || "badge-def");
+  document.getElementById("cardBadge").textContent = card.tag;
+  document.getElementById("cardChapter").textContent = card.chapter;
   document.getElementById("cardScene").classList.remove("flipped");
   document.getElementById("actions").style.display = "none";
   flipped = false;
@@ -526,21 +643,21 @@ function flipCard() {
 }
 
 function markCard(isKnown) {
-  const card = deck[idx];
+  const card = filteredDeck[idx];
   if (isKnown) { known.add(card.term); again.delete(card.term); }
   else { again.add(card.term); known.delete(card.term); }
   idx++;
-  if (idx >= deck.length) showComplete(); else render();
+  if (idx >= filteredDeck.length) showComplete(); else render();
 }
 
-function nextCard() { if (idx < deck.length - 1) { idx++; render(); } }
+function nextCard() { if (idx < filteredDeck.length - 1) { idx++; render(); } }
 function prevCard() { if (idx > 0) { idx--; render(); } }
 
 function updateStats() {
-  document.getElementById("statTotal").textContent = deck.length;
+  document.getElementById("statTotal").textContent = filteredDeck.length;
   document.getElementById("statKnow").textContent = known.size;
   document.getElementById("statAgain").textContent = again.size;
-  const pct = deck.length ? Math.round((known.size / deck.length) * 100) : 0;
+  const pct = filteredDeck.length ? Math.round((known.size / filteredDeck.length) * 100) : 0;
   document.getElementById("progressBar").style.width = pct + "%";
 }
 
@@ -549,19 +666,31 @@ function showComplete() {
   document.getElementById("actions").style.display = "none";
   document.getElementById("complete").style.display = "block";
   document.getElementById("completeDetail").textContent =
-    "You marked " + known.size + " of " + deck.length + " cards as 'know it'. Keep reviewing the rest!";
+    "You marked " + known.size + " of " + filteredDeck.length + " cards as 'know it'. Keep reviewing the rest!";
   updateStats();
 }
 
 function restartDeck() {
-  known = new Set(); again = new Set(); idx = 0; flipped = false;
+  known.clear(); again.clear(); idx = 0; flipped = false;
+  shuffle(filteredDeck);
   document.getElementById("complete").style.display = "none";
   document.getElementById("cardScene").style.display = "block";
+  document.getElementById("actions").style.display = "none";
   render();
 }
 
-buildFilters();
-render();
+/* ═══════════════════════════════════════════
+   UTILS
+════════════════════════════════════════════ */
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+}
+
+/* init */
+buildHome();
 </script>
 </body>
 </html>
