@@ -1,6 +1,8 @@
 # PSYC 101 Flashcards
 
-An interactive flashcard study app for **PSYC 101: Introduction to Psychology** 
+An interactive flashcard study app for **PSYC 101: Introduction to Psychology**, Summer 2026.
+
+🔗 **[Memoria208.github.io/psyc101-flashcards](https://Memoria208.github.io/psyc101-flashcards)**
 
 ---
 
@@ -33,26 +35,26 @@ An interactive flashcard study app for **PSYC 101: Introduction to Psychology**
 | Chapter | Topic | Status |
 |---------|-------|--------|
 | Chapter 1 | Psychology's Roots, Critical Thinking & Self-Improvement | ✅ 44 cards |
-| Chapter 2 | The Biology of Mind | 🔜 Coming soon |
-| Chapter 3 | Consciousness & the Two-Track Mind | 🔜 Coming soon |
-| Chapter 5 | Developing Through the Life Span | 🔜 Coming soon |
-| Chapter 6 | Sensation & Perception | 🔜 Coming soon |
-| Chapter 7 | Learning | 🔜 Coming soon |
-| Chapter 8 | Memory | 🔜 Coming soon |
-| Chapter 9 | Thinking, Language & Intelligence | 🔜 Coming soon |
-| Chapter 10 | Motivation & Emotion | 🔜 Coming soon |
-| Chapter 11 | Social Psychology | 🔜 Coming soon |
-| Chapter 12 | Personality | 🔜 Coming soon |
-| Chapter 13 | Psychological Disorders | 🔜 Coming soon |
-| Chapter 14 | Therapy | 🔜 Coming soon |
+| Chapter 2 | The Biology of Behavior and Consciousness | ✅ 65 cards |
+| Chapter 3 | Developing Through the Life Span | ✅ 51 cards |
+| Chapter 5 | Sensation & Perception | 🔜 Coming soon |
+| Chapter 6 | Learning | 🔜 Coming soon |
+| Chapter 7 | Memory | 🔜 Coming soon |
+| Chapter 8 | Thinking, Language & Intelligence | 🔜 Coming soon |
+| Chapter 9 | Motivation & Emotion | 🔜 Coming soon |
+| Chapter 10 | Social Psychology | 🔜 Coming soon |
+| Chapter 11 | Personality | 🔜 Coming soon |
+| Chapter 12 | Psychological Disorders | 🔜 Coming soon |
+| Chapter 13 | Therapy | 🔜 Coming soon |
+| Chapter 14 | Stress, Health & Human Flourishing | 🔜 Coming soon |
 
-New chapters are added throughout the semester as content is covered in class.
+New chapters are added throughout the semester as content is covered.
 
 ---
 
 ## A note on copyright
 
-Card content is derived from assigned textbook readings used for personal study purposes. This project is not affiliated with or endorsed by the publisher. Do not republish or redistribute the card content commercially.
+Card content is derived from assigned course readings used for personal study purposes. Do not republish or redistribute the card content commercially.
 
 ---
 
