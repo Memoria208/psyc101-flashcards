@@ -214,7 +214,7 @@ body {
 /* flashcard */
 .card-scene {
   perspective: 1000px;
-  height: 220px;
+  height: 240px;
   margin-bottom: 1.25rem;
   cursor: pointer;
 }
@@ -343,12 +343,52 @@ footer {
   <div class="multi-controls">
     <button class="btn-outline" onclick="selectAll()">Select all available</button>
     <button class="btn-outline" onclick="clearAll()">Clear selection</button>
+    <button class="btn-outline" onclick="openCreateModal()">+ Create card</button>
   </div>
 
   <button class="btn-start" id="startBtn" onclick="startStudy()" disabled>
     Start flashcards
   </button>
 
+  <!-- CUSTOM CARDS LIST -->
+  <div id="customCardsSection" style="display:none; margin-top:1.5rem;">
+    <div class="section-label" style="margin-bottom:10px;">Your custom cards</div>
+    <div id="customCardsList"></div>
+  </div>
+</div>
+
+<!-- CREATE CARD MODAL -->
+<div id="createModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.45); z-index:100; align-items:center; justify-content:center; padding:1rem;">
+  <div style="background:var(--surface); border-radius:var(--radius-lg); padding:1.5rem; width:100%; max-width:480px; border:0.5px solid var(--border2);">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.25rem;">
+      <div style="font-size:16px; font-weight:500;">Create a new card</div>
+      <button onclick="closeCreateModal()" style="background:none; border:none; font-size:20px; cursor:pointer; color:var(--text2); line-height:1;">&times;</button>
+    </div>
+    <div style="margin-bottom:0.75rem;">
+      <div class="section-label" style="margin-bottom:6px;">Chapter</div>
+      <select id="createChapter" style="width:100%; padding:8px 10px; border-radius:var(--radius-md); border:0.5px solid var(--border2); background:var(--bg); color:var(--text); font-family:var(--font); font-size:13px;"></select>
+    </div>
+    <div style="margin-bottom:0.75rem;">
+      <div class="section-label" style="margin-bottom:6px;">Tag / category</div>
+      <input id="createTag" type="text" placeholder="e.g. Definition, Core concept…" style="width:100%; padding:8px 10px; border-radius:var(--radius-md); border:0.5px solid var(--border2); background:var(--bg); color:var(--text); font-family:var(--font); font-size:13px;">
+    </div>
+    <div style="margin-bottom:0.75rem;">
+      <div class="section-label" style="margin-bottom:6px;">Term (front)</div>
+      <input id="createTerm" type="text" placeholder="Term or question" style="width:100%; padding:8px 10px; border-radius:var(--radius-md); border:0.5px solid var(--border2); background:var(--bg); color:var(--text); font-family:var(--font); font-size:13px;">
+    </div>
+    <div style="margin-bottom:1.25rem;">
+      <div class="section-label" style="margin-bottom:6px;">Definition (back)</div>
+      <textarea id="createDef" rows="3" placeholder="Definition or answer" style="width:100%; padding:8px 10px; border-radius:var(--radius-md); border:0.5px solid var(--border2); background:var(--bg); color:var(--text); font-family:var(--font); font-size:13px; resize:vertical;"></textarea>
+    </div>
+    <div id="createError" style="color:var(--red); font-size:12px; margin-bottom:0.75rem; display:none;"></div>
+    <div style="display:flex; gap:10px;">
+      <button class="btn-outline" onclick="closeCreateModal()" style="flex:1;">Cancel</button>
+      <button onclick="saveNewCard()" style="flex:2; padding:9px; border-radius:var(--radius-md); border:none; background:var(--accent); color:#fff; font-size:14px; font-weight:500; cursor:pointer; font-family:var(--font);">Add card</button>
+    </div>
+  </div>
+</div>
+
+<div id="psycFooter">
   <footer>
     Built from Myers &amp; DeWall, <em>Psychology in Everyday Life</em>, 6th ed. (2023) &middot; For personal study use
   </footer>
@@ -386,6 +426,7 @@ footer {
       <div class="card-face card-back">
         <div class="card-badge" id="cardChapter"></div>
         <div class="card-def" id="cardDef"></div>
+        <div class="card-hint">tap to flip back</div>
       </div>
     </div>
   </div>
@@ -406,6 +447,8 @@ footer {
     <h2>Deck complete!</h2>
     <p id="completeDetail"></p>
     <button class="btn-restart" onclick="restartDeck()">Study again</button>
+    &nbsp;
+    <button class="btn-restart" id="studyAgainBtn" onclick="restartStillLearning()" style="display:none;">Study still learning</button>
     &nbsp;
     <button class="btn-restart" onclick="goHome()">Choose chapters</button>
   </div>
@@ -767,6 +810,9 @@ function flipCard() {
     document.getElementById("cardScene").classList.add("flipped");
     document.getElementById("actions").style.display = "flex";
     flipped = true;
+  } else {
+    document.getElementById("cardScene").classList.remove("flipped");
+    flipped = false;
   }
 }
 
@@ -793,8 +839,11 @@ function showComplete() {
   document.getElementById("cardScene").style.display = "none";
   document.getElementById("actions").style.display = "none";
   document.getElementById("complete").style.display = "block";
+  const stillCount = again.size;
   document.getElementById("completeDetail").textContent =
-    "You marked " + known.size + " of " + filteredDeck.length + " cards as 'know it'. Keep reviewing the rest!";
+    "You marked " + known.size + " of " + filteredDeck.length + " cards as 'know it'."
+    + (stillCount > 0 ? " " + stillCount + " card" + (stillCount !== 1 ? "s" : "") + " still need work." : " Great job!");
+  document.getElementById("studyAgainBtn").style.display = stillCount > 0 ? "inline-block" : "none";
   updateStats();
 }
 
@@ -807,18 +856,164 @@ function restartDeck() {
   render();
 }
 
+function restartStillLearning() {
+  const stillTerms = new Set(again);
+  filteredDeck = filteredDeck.filter(c => stillTerms.has(c.term));
+  known.clear(); again.clear(); idx = 0; flipped = false;
+  shuffle(filteredDeck);
+  document.getElementById("complete").style.display = "none";
+  document.getElementById("cardScene").style.display = "block";
+  document.getElementById("actions").style.display = "none";
+  render();
+}
+
 /* ═══════════════════════════════════════════
    UTILS
 ════════════════════════════════════════════ */
 function shuffle(arr) {
+  const rnd = new Uint32Array(arr.length);
+  crypto.getRandomValues(rnd);
   for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
+    const j = rnd[i] % (i + 1);
     [arr[i], arr[j]] = [arr[j], arr[i]];
   }
 }
 
+/* ═══════════════════════════════════════════
+   SUPABASE CONFIG
+════════════════════════════════════════════ */
+const SUPABASE_URL = "https://gkluvggtgbsoouapufym.supabase.co";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdrbHV2Z2d0Z2Jzb291YXB1ZnltIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA3NzMwOTAsImV4cCI6MjA5NjM0OTA5MH0.Abb_-qg5on4C5-2IyQAJAdOkDZMD5kjwzllnVQwd75M";
+
+async function sbFetch(path, options = {}) {
+  const res = await fetch(SUPABASE_URL + "/rest/v1/" + path, {
+    headers: {
+      "apikey": SUPABASE_KEY,
+      "Authorization": "Bearer " + SUPABASE_KEY,
+      "Content-Type": "application/json",
+      "Prefer": options.prefer || "",
+    },
+    ...options,
+  });
+  if (!res.ok) { const err = await res.text(); throw new Error(err); }
+  const text = await res.text();
+  return text ? JSON.parse(text) : null;
+}
+
+/* ═══════════════════════════════════════════
+   CUSTOM CARDS — Supabase persistence
+════════════════════════════════════════════ */
+async function loadCustomCards() {
+  try {
+    const rows = await sbFetch("custom_cards_psyc?select=*&order=created_at.asc");
+    rows.forEach(row => {
+      const ch = CHAPTERS.find(c => c.id === row.chapter_id);
+      if (ch) ch.cards.push({ term: row.term, def: row.def, tag: row.tag, custom: true, dbId: row.id });
+    });
+  } catch(e) { console.error("Failed to load custom cards:", e); }
+}
+
+async function deleteCustomCard(dbId, chId, term) {
+  try {
+    await sbFetch("custom_cards_psyc?id=eq." + dbId, { method: "DELETE" });
+    const ch = CHAPTERS.find(c => c.id === chId);
+    if (ch) ch.cards = ch.cards.filter(c => c.dbId !== dbId);
+    buildHome();
+  } catch(e) { alert("Couldn't delete card: " + e.message); }
+}
+
+function openCreateModal() {
+  const sel = document.getElementById("createChapter");
+  sel.innerHTML = CHAPTERS.filter(c => !c.coming).map(c =>
+    `<option value="${c.id}">${c.num} — ${c.title}</option>`
+  ).join("");
+  document.getElementById("createTerm").value = "";
+  document.getElementById("createDef").value = "";
+  document.getElementById("createTag").value = "";
+  document.getElementById("createError").style.display = "none";
+  document.getElementById("createModal").style.display = "flex";
+}
+
+function closeCreateModal() {
+  document.getElementById("createModal").style.display = "none";
+}
+
+async function saveNewCard() {
+  const chId = document.getElementById("createChapter").value;
+  const term = document.getElementById("createTerm").value.trim();
+  const def  = document.getElementById("createDef").value.trim();
+  const tag  = document.getElementById("createTag").value.trim() || "Custom";
+  const errEl = document.getElementById("createError");
+  const saveBtn = document.querySelector("#createModal button[onclick='saveNewCard()']");
+  if (!term || !def) {
+    errEl.textContent = "Please fill in both the term and definition.";
+    errEl.style.display = "block";
+    return;
+  }
+  errEl.style.display = "none";
+  saveBtn.textContent = "Saving…";
+  saveBtn.disabled = true;
+  try {
+    const rows = await sbFetch("custom_cards_psyc", {
+      method: "POST",
+      prefer: "return=representation",
+      body: JSON.stringify({ chapter_id: chId, term, def, tag }),
+    });
+    const saved = rows[0];
+    const ch = CHAPTERS.find(c => c.id === chId);
+    if (ch) ch.cards.push({ term, def, tag, custom: true, dbId: saved.id });
+    closeCreateModal();
+    buildHome();
+  } catch(e) {
+    errEl.textContent = "Error saving: " + e.message;
+    errEl.style.display = "block";
+  } finally {
+    saveBtn.textContent = "Add card";
+    saveBtn.disabled = false;
+  }
+}
+
+document.getElementById("createModal").addEventListener("click", function(e) {
+  if (e.target === this) closeCreateModal();
+});
+
+/* ═══════════════════════════════════════════
+   CUSTOM CARDS LIST (home screen)
+════════════════════════════════════════════ */
+function buildCustomList() {
+  const container = document.getElementById("customCardsList");
+  const allCustom = CHAPTERS.flatMap(ch =>
+    ch.cards.filter(c => c.custom).map(c => ({ ...c, chId: ch.id, chNum: ch.num }))
+  );
+  if (!allCustom.length) {
+    container.innerHTML = "";
+    document.getElementById("customCardsSection").style.display = "none";
+    return;
+  }
+  document.getElementById("customCardsSection").style.display = "block";
+  container.innerHTML = allCustom.map(c => `
+    <div style="display:flex; align-items:flex-start; gap:10px; padding:10px 0; border-bottom:0.5px solid var(--border);">
+      <div style="flex:1; min-width:0;">
+        <div style="font-size:13px; font-weight:500; color:var(--text);">${escHtml(c.term)}</div>
+        <div style="font-size:12px; color:var(--text2); margin-top:2px; line-height:1.4;">${escHtml(c.def)}</div>
+        <div style="font-size:11px; color:var(--text3); margin-top:3px;">${escHtml(c.chNum)} &middot; ${escHtml(c.tag)}</div>
+      </div>
+      <button onclick="deleteCustomCard('${escHtml(String(c.dbId))}', '${escHtml(c.chId)}', '${escHtml(c.term)}')"
+        style="flex-shrink:0; background:none; border:none; cursor:pointer; color:var(--text3); font-size:16px; padding:2px 4px; line-height:1;"
+        title="Delete card">&times;</button>
+    </div>
+  `).join("");
+}
+
+function escHtml(str) {
+  return String(str).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
+
+const _origBuildHome = buildHome;
+buildHome = function() { _origBuildHome(); buildCustomList(); };
+
 /* init */
-buildHome();
+loadCustomCards().then(() => buildHome());
 </script>
 </body>
 </html>
