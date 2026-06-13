@@ -6,6 +6,19 @@ An interactive flashcard study app for **PSYC 101: Introduction to Psychology**,
 
 ---
 
+## Study Hub
+
+A companion page where students can read and post shared study notes, organized by chapter.
+
+📓 **[Memoria208.github.io/psyc101-flashcards/study-hub](https://Memoria208.github.io/psyc101-flashcards/study-hub.html)**
+
+- Notes are organized by the course's chapter groupings
+- Post anonymously or with your name
+- No login or account required
+- Powered by Firebase Firestore
+
+---
+
 ## What it does
 
 - **Flip cards** — tap or click any card to reveal the definition
@@ -60,4 +73,4 @@ Card content is derived from assigned course readings used for personal study pu
 
 ## Contributing
 
-If you're a classmate and want to help add chapters or spot a mistake, feel free to open an issue or pull request.
+If you're a classmate and want to help add chapters or spot a mistake, feel free to open an issue or pull request. You can also post study notes directly on the [Study Hub](https://Memoria208.github.io/psyc101-flashcards/study-hub.html).
