@@ -263,11 +263,6 @@
 </head>
 <body>
 
-<!-- ⚠️ SETUP BANNER — remove this div after you add your Firebase config below -->
-<div id="setup-banner">
-  ⚠️ Firebase not configured yet. Replace the <code>firebaseConfig</code> placeholder in the &lt;script&gt; section with your credentials, then delete this banner.
-</div>
-
 <header>
   <h1>PSYC 101 — Study Hub</h1>
   <p>Shared notes from students, organized by chapter</p>
@@ -291,14 +286,15 @@
   // ─────────────────────────────────────────────────────────
   // 🔧 STEP 1: Replace this object with your Firebase config.
   // ─────────────────────────────────────────────────────────
-  const firebaseConfig = {
-    apiKey: "REPLACE_ME",
-    authDomain: "REPLACE_ME",
-    projectId: "REPLACE_ME",
-    storageBucket: "REPLACE_ME",
-    messagingSenderId: "REPLACE_ME",
-    appId: "REPLACE_ME"
-  };
+ const firebaseConfig = {
+  apiKey: "AIzaSyCGlhtk6i6G2l02iC1qwCBGQ3plKGEI72U",
+  authDomain: "psyc-study-hub.firebaseapp.com",
+  projectId: "psyc-study-hub",
+  storageBucket: "psyc-study-hub.firebasestorage.app",
+  messagingSenderId: "289930203679",
+  appId: "1:289930203679:web:a3168688d97cbd15e4bb2a",
+  measurementId: "G-KCZ7WS7QPW"
+};
 
   const app = initializeApp(firebaseConfig);
   const db  = getFirestore(app);
