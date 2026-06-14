@@ -6,20 +6,16 @@
 <title>PSYC 101 — Study Hub</title>
 <style>
   :root {
+    --accent: #3d5a99;
+    --accent-hover: #2e4577;
     --bg: #f7f6f2;
     --surface: #ffffff;
-    --border: #e2e0d8;
+    --border: #e0ddd6;
     --text: #1a1a18;
     --muted: #6b6a64;
-    --accent: #3d5a99;
-    --accent-light: #eef1f9;
-    --accent-hover: #2e4578;
-    --tag-bg: #e8ecf7;
-    --tag-text: #2e4578;
-    --success: #2d7a4f;
-    --success-bg: #eaf4ef;
-    --sans: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    --mono: 'Courier New', monospace;
+    --success: #2d6a4f;
+    --success-bg: #d8f3dc;
+    --sans: 'Segoe UI', system-ui, sans-serif;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -28,132 +24,50 @@
     font-family: var(--sans);
     background: var(--bg);
     color: var(--text);
-    font-size: 15px;
-    line-height: 1.6;
+    min-height: 100vh;
   }
 
-  /* Header */
+  #setup-banner {
+    background: #fff3cd;
+    border-bottom: 1px solid #ffc107;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.85rem;
+    color: #664d03;
+  }
+
   header {
     background: var(--accent);
     color: #fff;
-    padding: 2rem 1.5rem 1.5rem;
-    text-align: center;
+    padding: 1.5rem 1.5rem 1.25rem;
   }
 
-  header h1 {
-    font-size: 1.75rem;
-    font-weight: 600;
-    letter-spacing: -0.02em;
-    margin-bottom: 0.35rem;
-  }
-
-  header p {
-    font-size: 0.9rem;
-    opacity: 0.8;
-    margin-bottom: 1.1rem;
-  }
+  header h1 { font-size: 1.6rem; font-weight: 700; margin-bottom: 0.25rem; }
+  header p { font-size: 0.9rem; opacity: 0.85; margin-bottom: 0.75rem; }
 
   .flashcard-link {
     display: inline-block;
-    background: rgba(255,255,255,0.15);
-    border: 1px solid rgba(255,255,255,0.35);
+    background: rgba(255,255,255,0.18);
     color: #fff;
     text-decoration: none;
-    padding: 0.45rem 1.1rem;
-    border-radius: 6px;
-    font-size: 0.85rem;
-    transition: background 0.2s;
-  }
-
-  .flashcard-link:hover { background: rgba(255,255,255,0.25); }
-
-  /* Setup banner */
-  #setup-banner {
-    background: #fff8e1;
-    border-bottom: 1px solid #f0d060;
-    padding: 0.8rem 1.5rem;
-    font-size: 0.85rem;
-    color: #5a4800;
-    text-align: center;
-  }
-
-  #setup-banner code {
-    background: #f0d060;
-    padding: 1px 5px;
-    border-radius: 3px;
-    font-family: var(--mono);
+    padding: 0.35rem 0.85rem;
+    border-radius: 5px;
     font-size: 0.82rem;
-  }
-
-  /* Layout */
-  main {
-    max-width: 860px;
-    margin: 0 auto;
-    padding: 2rem 1.25rem;
-  }
-
-  /* Visual Aids */
-  .visual-aids {
-    margin-bottom: 2rem;
-  }
-
-  .section-heading {
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 0.75rem;
-  }
-
-  .visual-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 0.75rem;
-  }
-
-  .visual-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 1rem 1.1rem;
-    text-decoration: none;
-    color: var(--text);
-    display: flex;
-    align-items: flex-start;
-    gap: 0.75rem;
-    transition: border-color 0.15s, box-shadow 0.15s;
-  }
-
-  .visual-card:hover {
-    border-color: var(--accent);
-    box-shadow: 0 2px 8px rgba(61,90,153,0.1);
-  }
-
-  .visual-icon {
-    font-size: 1.5rem;
-    line-height: 1;
-    flex-shrink: 0;
-  }
-
-  .visual-info strong {
-    display: block;
-    font-size: 0.9rem;
     font-weight: 600;
-    margin-bottom: 0.2rem;
+    transition: background 0.15s;
+  }
+  .flashcard-link:hover { background: rgba(255,255,255,0.3); }
+
+  main {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 1.5rem 1rem 3rem;
   }
 
-  .visual-info span {
-    font-size: 0.8rem;
-    color: var(--muted);
-  }
-
-  /* Chapter sections */
-  .chapter {
+  .chapter-block {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 10px;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
     overflow: hidden;
   }
 
@@ -161,158 +75,110 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem 1.25rem;
+    padding: 0.9rem 1.1rem;
     cursor: pointer;
     user-select: none;
+    background: var(--surface);
     border-bottom: 1px solid transparent;
-    transition: background 0.15s;
+    transition: background 0.12s;
   }
-
-  .chapter-header:hover { background: var(--accent-light); }
-
+  .chapter-header:hover { background: #f0eee9; }
   .chapter-header.open { border-bottom-color: var(--border); }
 
-  .chapter-label {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-  }
+  .chapter-title { font-size: 1rem; font-weight: 600; }
+  .chapter-toggle { font-size: 0.85rem; color: var(--muted); transition: transform 0.2s; }
+  .chapter-header.open .chapter-toggle { transform: rotate(180deg); }
 
-  .chapter-tag {
-    background: var(--tag-bg);
-    color: var(--tag-text);
-    font-size: 0.75rem;
-    font-weight: 600;
-    padding: 3px 9px;
-    border-radius: 20px;
-    white-space: nowrap;
-  }
-
-  .chapter-title {
-    font-size: 0.97rem;
-    font-weight: 600;
-    color: var(--text);
-  }
-
-  .chapter-meta {
-    font-size: 0.8rem;
-    color: var(--muted);
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-  }
-
-  .note-count {
-    background: var(--accent-light);
-    color: var(--accent);
-    font-size: 0.75rem;
-    font-weight: 600;
-    padding: 2px 8px;
-    border-radius: 20px;
-  }
-
-  .chevron {
-    font-size: 0.8rem;
-    color: var(--muted);
-    transition: transform 0.2s;
-  }
-
-  .chevron.open { transform: rotate(180deg); }
-
-  /* Chapter body */
-  .chapter-body {
-    display: none;
-    padding: 1.25rem;
-  }
-
+  .chapter-body { display: none; padding: 1rem 1.1rem 1.25rem; }
   .chapter-body.open { display: block; }
 
-  /* Notes list */
-  .notes-list {
-    margin-bottom: 1.25rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
+  /* Visual aids section */
+  .visual-aids {
+    margin-bottom: 1.1rem;
   }
 
-  .note-card {
-    background: var(--bg);
+  .visual-aids h3 {
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    margin-bottom: 0.6rem;
+  }
+
+  .diagram-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fafaf8;
+    margin-bottom: 0.6rem;
+  }
+
+  .diagram-card img {
+    width: 100%;
+    max-width: 420px;
+    display: block;
+    padding: 0.75rem;
+  }
+
+  .diagram-caption {
+    padding: 0.5rem 0.75rem 0.65rem;
+    font-size: 0.8rem;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  /* Notes list */
+  .notes-label {
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+    margin-top: 0.25rem;
+  }
+
+  .notes-list { list-style: none; margin-bottom: 1rem; }
+
+  .note-item {
     border: 1px solid var(--border);
     border-radius: 7px;
-    padding: 0.85rem 1rem;
+    padding: 0.65rem 0.85rem;
+    margin-bottom: 0.5rem;
+    background: #fafaf8;
+    font-size: 0.875rem;
+    line-height: 1.5;
   }
 
   .note-meta {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 0.4rem;
-  }
-
-  .note-author {
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--accent);
-  }
-
-  .note-date {
     font-size: 0.75rem;
     color: var(--muted);
+    margin-top: 0.3rem;
   }
 
-  .delete-btn {
-    background: none;
-    border: none;
+  .no-notes {
+    font-size: 0.85rem;
     color: var(--muted);
-    font-size: 0.75rem;
-    cursor: pointer;
-    padding: 2px 6px;
-    border-radius: 4px;
-    transition: background 0.15s, color 0.15s;
-    line-height: 1;
-  }
-
-  .delete-btn:hover {
-    background: #fde8e8;
-    color: #c0392b;
-  }
-
-  .note-text {
-    font-size: 0.9rem;
-    color: var(--text);
-    white-space: pre-wrap;
-    word-break: break-word;
-  }
-
-  .empty-state {
-    text-align: center;
-    padding: 1.5rem 1rem;
-    color: var(--muted);
-    font-size: 0.875rem;
-    border: 1px dashed var(--border);
-    border-radius: 7px;
-    margin-bottom: 1.25rem;
-  }
-
-  .loading-state {
-    text-align: center;
-    padding: 1rem;
-    color: var(--muted);
-    font-size: 0.875rem;
+    font-style: italic;
+    margin-bottom: 1rem;
   }
 
   /* Add note form */
-  .add-note-form {
-    border-top: 1px solid var(--border);
-    padding-top: 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.65rem;
+  .add-note h4 {
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    margin-bottom: 0.6rem;
   }
 
   .form-row {
     display: flex;
-    gap: 0.65rem;
+    gap: 0.6rem;
+    margin-bottom: 0.6rem;
   }
 
   .form-row input {
@@ -327,7 +193,6 @@
     outline: none;
     transition: border-color 0.15s;
   }
-
   .form-row input:focus { border-color: var(--accent); }
 
   textarea.note-input {
@@ -343,8 +208,8 @@
     min-height: 80px;
     outline: none;
     transition: border-color 0.15s;
+    margin-bottom: 0.6rem;
   }
-
   textarea.note-input:focus { border-color: var(--accent); }
 
   .submit-row {
@@ -354,10 +219,7 @@
     gap: 0.75rem;
   }
 
-  .submit-hint {
-    font-size: 0.78rem;
-    color: var(--muted);
-  }
+  .submit-hint { font-size: 0.78rem; color: var(--muted); }
 
   button.post-btn {
     background: var(--accent);
@@ -371,7 +233,6 @@
     transition: background 0.15s;
     white-space: nowrap;
   }
-
   button.post-btn:hover { background: var(--accent-hover); }
   button.post-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
@@ -384,7 +245,6 @@
     display: none;
   }
 
-  /* Footer */
   footer {
     text-align: center;
     padding: 2rem 1rem;
@@ -403,7 +263,10 @@
 </head>
 <body>
 
-
+<!-- ⚠️ SETUP BANNER — remove this div after you add your Firebase config below -->
+<div id="setup-banner">
+  ⚠️ Firebase not configured yet. Replace the <code>firebaseConfig</code> placeholder in the &lt;script&gt; section with your credentials, then delete this banner.
+</div>
 
 <header>
   <h1>PSYC 101 — Study Hub</h1>
@@ -412,38 +275,7 @@
 </header>
 
 <main>
-
-  <!-- Visual Aids -->
-  <div class="visual-aids">
-    <div class="section-heading">Visual Aids</div>
-    <div class="visual-grid">
-      <a class="visual-card" href="neurotransmitter-body-map.html" target="_blank">
-        <div class="visual-icon">🧠</div>
-        <div class="visual-info">
-          <strong>Neurotransmitter Body Map</strong>
-          <span>Where each neurotransmitter acts in the body — Ch. 2</span>
-        </div>
-      </a>
-      <a class="visual-card" href="neuron-structure.png" target="_blank">
-        <div class="visual-icon">🔬</div>
-        <div class="visual-info">
-          <strong>Neuron Structure</strong>
-          <span>Dendrites, cell body, axon & myelin sheath — Ch. 2</span>
-        </div>
-      </a>
-      <a class="visual-card" href="how-neurons-communicate.png" target="_blank">
-        <div class="visual-icon">⚡</div>
-        <div class="visual-info">
-          <strong>How Neurons Communicate</strong>
-          <span>Synaptic gap, neurotransmitters & re-uptake — Ch. 2</span>
-        </div>
-      </a>
-    </div>
-  </div>
-
-  <!-- Chapters will be rendered here by JS -->
   <div id="chapters-container"></div>
-
 </main>
 
 <footer>
@@ -451,7 +283,6 @@
 </footer>
 
 
-<!-- Firebase SDK -->
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
   import { getFirestore, collection, addDoc, query, where, orderBy, getDocs, serverTimestamp }
@@ -459,228 +290,165 @@
 
   // ─────────────────────────────────────────────────────────
   // 🔧 STEP 1: Replace this object with your Firebase config.
-  //    Get it from: Firebase Console → Your Project →
-  //    Project Settings → Your Apps → SDK setup → Config
   // ─────────────────────────────────────────────────────────
   const firebaseConfig = {
-    apiKey: "AIzaSyCGlhtk6i6G2l02iC1qwCBGQ3plKGEI72U",
-    authDomain: "psyc-study-hub.firebaseapp.com",
-    projectId: "psyc-study-hub",
-    storageBucket: "psyc-study-hub.firebasestorage.app",
-    messagingSenderId: "289930203679",
-    appId: "1:289930203679:web:a3168688d97cbd15e4bb2a"
+    apiKey: "REPLACE_ME",
+    authDomain: "REPLACE_ME",
+    projectId: "REPLACE_ME",
+    storageBucket: "REPLACE_ME",
+    messagingSenderId: "REPLACE_ME",
+    appId: "REPLACE_ME"
   };
 
-  // Chapter definitions — matches your course schedule
-  const CHAPTERS = [
-    { id: "ch1",    label: "Chapter 1",     title: "Thinking Critically with Psychological Science",  due: "Due Jun 7" },
-    { id: "ch2_3",  label: "Chapters 2 & 3", title: "Neuroscience & Consciousness",                   due: "Due Jun 14" },
-    { id: "ch5_6",  label: "Chapters 5 & 6", title: "Sensation & Perception / Learning",              due: "Due Jun 21" },
-    { id: "ch7_8",  label: "Chapters 7 & 8", title: "Memory / Thinking & Language",                   due: "Due Jun 28" },
-    { id: "ch9_10", label: "Chapters 9 & 10","title": "Motivation & Emotion / Developmental Psych",  due: "Due Jul 5" },
-    { id: "ch11_12",label: "Chapters 11 & 12","title": "Personality / Social Psychology",             due: "Due Jul 12" },
-    { id: "ch13_14",label: "Chapters 13 & 14","title": "Psychological Disorders / Treatment",         due: "Due Jul 19" },
-    { id: "final",  label: "Finals Review",  title: "All Chapters",                                   due: "Jul 25" },
+  const app = initializeApp(firebaseConfig);
+  const db  = getFirestore(app);
+
+  // ─────────────────────────────────────────────────────────
+  // Chapter definitions
+  // visualAids: optional array of { src, caption } for images
+  // ─────────────────────────────────────────────────────────
+  const chapters = [
+    { id: "ch1",   label: "Chapter 1 — Psychology's Story & Critical Thinking",      visualAids: [] },
+    { id: "ch2_3", label: "Chapters 2 & 3 — Neuroscience & Consciousness",
+      visualAids: [
+        {
+          src: "nervouse-system.png",
+          caption: "The Nervous System — CNS vs. PNS, somatic vs. autonomic, sympathetic vs. parasympathetic divisions"
+        }
+      ]
+    },
+    { id: "ch5_6", label: "Chapters 5 & 6 — Sensation & Perception / Learning",     visualAids: [] },
+    { id: "ch7_8", label: "Chapters 7 & 8 — Memory / Thinking & Language",           visualAids: [] },
+    { id: "ch9_10",label: "Chapters 9 & 10 — Intelligence / Development",            visualAids: [] },
+    { id: "ch11_12",label:"Chapters 11 & 12 — Motivation & Emotion / Personality",  visualAids: [] },
+    { id: "ch13_14",label:"Chapters 13 & 14 — Social Psychology / Psychological Disorders", visualAids: [] },
   ];
 
-// Init Firebase — gracefully handle missing config
-  let db = null;
-  const configured = true;
-
-  if (configured) {
-    const app = initializeApp(firebaseConfig);
-    db = getFirestore(app);
-  }
-
-  // ── Render chapters ──────────────────────────────────────
+  // ─────────────────────────────────────────────────────────
+  // Build UI
+  // ─────────────────────────────────────────────────────────
   const container = document.getElementById("chapters-container");
 
-  CHAPTERS.forEach(ch => {
-    const section = document.createElement("div");
-    section.className = "chapter";
-    section.innerHTML = `
+  chapters.forEach(ch => {
+    const block = document.createElement("div");
+    block.className = "chapter-block";
+
+    // Visual aids HTML
+    let visualHTML = "";
+    if (ch.visualAids && ch.visualAids.length > 0) {
+      const cards = ch.visualAids.map(v => `
+        <div class="diagram-card">
+          <img src="${v.src}" alt="${v.caption}" loading="lazy">
+          <div class="diagram-caption">${v.caption}</div>
+        </div>
+      `).join("");
+      visualHTML = `<div class="visual-aids"><h3>📷 Visual Aids</h3>${cards}</div>`;
+    }
+
+    block.innerHTML = `
       <div class="chapter-header" data-id="${ch.id}">
-        <div class="chapter-label">
-          <span class="chapter-tag">${ch.label}</span>
-          <span class="chapter-title">${ch.title}</span>
-        </div>
-        <div class="chapter-meta">
-          <span class="note-count" id="count-${ch.id}">0 notes</span>
-          <span style="font-size:0.8rem;color:var(--muted)">${ch.due}</span>
-          <span class="chevron" id="chev-${ch.id}">▼</span>
-        </div>
+        <span class="chapter-title">${ch.label}</span>
+        <span class="chapter-toggle">▼</span>
       </div>
       <div class="chapter-body" id="body-${ch.id}">
-        <div class="notes-list" id="notes-${ch.id}">
-          <div class="loading-state">Loading notes…</div>
-        </div>
-        <div class="add-note-form">
+        ${visualHTML}
+        <p class="notes-label">📝 Student Notes</p>
+        <ul class="notes-list" id="notes-${ch.id}">
+          <li class="no-notes">Loading notes…</li>
+        </ul>
+
+        <div class="add-note">
+          <h4>➕ Add a Note</h4>
           <div class="form-row">
-            <input type="text" id="name-${ch.id}" placeholder="Your name (optional)" maxlength="40"/>
+            <input type="text" id="name-${ch.id}" placeholder="Your name (optional)" maxlength="40">
           </div>
-          <textarea class="note-input" id="text-${ch.id}" placeholder="Add a study note, mnemonic, key concept, or tip for this chapter…" maxlength="1000"></textarea>
+          <textarea class="note-input" id="text-${ch.id}" placeholder="Share something helpful — a summary, memory trick, or connection…" maxlength="600"></textarea>
           <div class="submit-row">
-            <span class="submit-hint">Keep it helpful — no spoilers for quizzes 😄</span>
-            <div style="display:flex;align-items:center;gap:0.75rem">
-              <span class="post-success" id="success-${ch.id}">✓ Posted!</span>
-              <button class="post-btn" id="btn-${ch.id}" data-chapter="${ch.id}">Post note</button>
-            </div>
+            <span class="submit-hint">Max 600 characters · visible to all classmates</span>
+            <button class="post-btn" id="btn-${ch.id}">Post Note</button>
           </div>
+          <div class="post-success" id="ok-${ch.id}">✓ Note posted!</div>
         </div>
       </div>
     `;
-    container.appendChild(section);
+    container.appendChild(block);
 
     // Toggle open/close
-    section.querySelector(".chapter-header").addEventListener("click", () => {
-      const body = document.getElementById(`body-${ch.id}`);
-      const header = section.querySelector(".chapter-header");
-      const chev = document.getElementById(`chev-${ch.id}`);
-      const isOpen = body.classList.contains("open");
-      body.classList.toggle("open", !isOpen);
-      header.classList.toggle("open", !isOpen);
-      chev.classList.toggle("open", !isOpen);
-      if (!isOpen) loadNotes(ch.id);
+    block.querySelector(".chapter-header").addEventListener("click", async function () {
+      const header = this;
+      const body   = document.getElementById(`body-${ch.id}`);
+      const isOpen = body.classList.toggle("open");
+      header.classList.toggle("open", isOpen);
+      if (isOpen) await loadNotes(ch.id);
     });
 
-    // Post button
+    // Post note
     document.getElementById(`btn-${ch.id}`).addEventListener("click", () => postNote(ch.id));
   });
 
-  // ── Load notes from Firestore ────────────────────────────
   async function loadNotes(chapterId) {
-    const listEl = document.getElementById(`notes-${chapterId}`);
-    const countEl = document.getElementById(`count-${chapterId}`);
-
-    if (!configured) {
-      listEl.innerHTML = `<div class="empty-state">Firebase not set up yet — notes will appear here once configured.</div>`;
-      return;
-    }
-
-    listEl.innerHTML = `<div class="loading-state">Loading…</div>`;
-
+    const list = document.getElementById(`notes-${chapterId}`);
+    list.innerHTML = "<li class='no-notes'>Loading…</li>";
     try {
       const q = query(
         collection(db, "notes"),
         where("chapter", "==", chapterId),
-        orderBy("createdAt", "desc")
+        orderBy("ts", "desc")
       );
       const snap = await getDocs(q);
-      const notes = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-
-      countEl.textContent = `${notes.length} note${notes.length !== 1 ? "s" : ""}`;
-
-      if (notes.length === 0) {
-        listEl.innerHTML = `<div class="empty-state">No notes yet — be the first to add one!</div>`;
+      if (snap.empty) {
+        list.innerHTML = "<li class='no-notes'>No notes yet — be the first!</li>";
         return;
       }
-
-      listEl.innerHTML = "";
-      notes.forEach(n => {
-        const card = document.createElement("div");
-        card.className = "note-card";
-        card.innerHTML = `
-          <div class="note-meta">
-            <span class="note-author">${escHtml(n.author || "Anonymous")}</span>
-            <div style="display:flex;align-items:center;gap:0.5rem">
-              <span class="note-date">${formatDate(n.createdAt)}</span>
-              <button class="delete-btn" data-id="${n.id}" data-chapter="${chapterId}">✕ delete</button>
-            </div>
-          </div>
-          <div class="note-text">${escHtml(n.text)}</div>
-        `;
-        listEl.appendChild(card);
-        card.querySelector(".delete-btn").addEventListener("click", () => deleteNote(n.id, chapterId));
+      list.innerHTML = "";
+      snap.forEach(doc => {
+        const d = doc.data();
+        const li = document.createElement("li");
+        li.className = "note-item";
+        const name = d.name ? d.name : "Anonymous";
+        const date = d.ts?.toDate ? d.ts.toDate().toLocaleDateString() : "";
+        li.innerHTML = `${escHtml(d.text)}<div class="note-meta">${escHtml(name)}${date ? " · " + date : ""}</div>`;
+        list.appendChild(li);
       });
-
-    } catch (err) {
-      listEl.innerHTML = `<div class="empty-state">Could not load notes. Check your Firebase setup.</div>`;
-      console.error(err);
+    } catch (e) {
+      list.innerHTML = "<li class='no-notes'>Could not load notes — check Firebase config.</li>";
+      console.error(e);
     }
   }
 
-  // ── Post a note ──────────────────────────────────────────
   async function postNote(chapterId) {
     const nameEl = document.getElementById(`name-${chapterId}`);
     const textEl = document.getElementById(`text-${chapterId}`);
     const btn    = document.getElementById(`btn-${chapterId}`);
-    const ok     = document.getElementById(`success-${chapterId}`);
-
-    const text = textEl.value.trim();
+    const ok     = document.getElementById(`ok-${chapterId}`);
+    const text   = textEl.value.trim();
     if (!text) { textEl.focus(); return; }
 
-    if (!configured) {
-      alert("Firebase is not configured yet. Add your credentials to the firebaseConfig object in the script.");
-      return;
-    }
-
     btn.disabled = true;
-    btn.textContent = "Posting…";
-
     try {
-      const docRef = await addDoc(collection(db, "notes"), {
+      await addDoc(collection(db, "notes"), {
         chapter: chapterId,
-        author: nameEl.value.trim() || "Anonymous",
+        name: nameEl.value.trim() || "Anonymous",
         text,
-        createdAt: serverTimestamp()
+        ts: serverTimestamp()
       });
-
-textEl.value = "";
+      textEl.value = "";
       nameEl.value = "";
       ok.style.display = "inline-block";
       setTimeout(() => { ok.style.display = "none"; }, 3000);
-
-      // Reload notes for this chapter
       await loadNotes(chapterId);
-
-    } catch (err) {
-      alert("Could not post note. Check your Firebase config and Firestore rules.");
-      console.error(err);
+    } catch (e) {
+      alert("Could not post note. Check Firebase config.");
+      console.error(e);
     }
-
     btn.disabled = false;
-    btn.textContent = "Post note";
   }
 
-  // ── Delete a note ────────────────────────────────────────
-  async function deleteNote(noteId, chapterId) {
-    if (!confirm("Are you sure you want to delete this note?")) return;
-    if (!confirm("This is permanent and cannot be undone. Delete anyway?")) return;
-    try {
-      const { deleteDoc, doc } = await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js");
-      await deleteDoc(doc(db, "notes", noteId));
-await loadNotes(chapterId);
-    } catch (err) {
-      alert("Could not delete note.");
-      console.error(err);
-    }
-  }
-
-  // ── Helpers ──────────────────────────────────────────────
   function escHtml(str) {
-    return str.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+    return String(str)
+      .replace(/&/g,"&amp;").replace(/</g,"&lt;")
+      .replace(/>/g,"&gt;").replace(/"/g,"&quot;");
   }
-
-  function formatDate(ts) {
-    if (!ts) return "";
-    const d = ts.toDate ? ts.toDate() : new Date(ts);
-    return d.toLocaleDateString("en-US", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" });
-  }
-
 </script>
-
-<!--
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  🔧 FIREBASE SETUP — 5 MINUTE GUIDE
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-1. Go to https://console.firebase.google.com
-2. Click "Add project" → name it (e.g. psyc101-study-hub) → Continue
-3. Disable Google Analytics if you don't need it → Create project
-4. In the left sidebar: Build → Firestore Database → Create database
-   · Choose "Start in test mode" (allows reads/writes for 30 days — fine for class)
-   · Pick any location → Enable
-5. In the left sidebar: Project Overview ⚙️ → Project settings
-   · Scroll to "Your apps" → click </> (Web app icon)
-   · Register app (any nickname) → copy the firebaseConfig object
-6. Paste it into the firebaseConfig variable in the <script> above
+</body>
+</html>
