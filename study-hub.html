@@ -6,16 +6,20 @@
 <title>PSYC 101 — Study Hub</title>
 <style>
   :root {
-    --accent: #3d5a99;
-    --accent-hover: #2e4577;
     --bg: #f7f6f2;
     --surface: #ffffff;
-    --border: #e0ddd6;
+    --border: #e2e0d8;
     --text: #1a1a18;
     --muted: #6b6a64;
-    --success: #2d6a4f;
-    --success-bg: #d8f3dc;
-    --sans: 'Segoe UI', system-ui, sans-serif;
+    --accent: #3d5a99;
+    --accent-light: #eef1f9;
+    --accent-hover: #2e4578;
+    --tag-bg: #e8ecf7;
+    --tag-text: #2e4578;
+    --success: #2d7a4f;
+    --success-bg: #eaf4ef;
+    --sans: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    --mono: 'Courier New', monospace;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -24,50 +28,132 @@
     font-family: var(--sans);
     background: var(--bg);
     color: var(--text);
-    min-height: 100vh;
+    font-size: 15px;
+    line-height: 1.6;
   }
 
-  #setup-banner {
-    background: #fff3cd;
-    border-bottom: 1px solid #ffc107;
-    padding: 0.75rem 1.5rem;
-    font-size: 0.85rem;
-    color: #664d03;
-  }
-
+  /* Header */
   header {
     background: var(--accent);
     color: #fff;
-    padding: 1.5rem 1.5rem 1.25rem;
+    padding: 2rem 1.5rem 1.5rem;
+    text-align: center;
   }
 
-  header h1 { font-size: 1.6rem; font-weight: 700; margin-bottom: 0.25rem; }
-  header p { font-size: 0.9rem; opacity: 0.85; margin-bottom: 0.75rem; }
+  header h1 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.35rem;
+  }
+
+  header p {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-bottom: 1.1rem;
+  }
 
   .flashcard-link {
     display: inline-block;
-    background: rgba(255,255,255,0.18);
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.35);
     color: #fff;
     text-decoration: none;
-    padding: 0.35rem 0.85rem;
-    border-radius: 5px;
+    padding: 0.45rem 1.1rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    transition: background 0.2s;
+  }
+
+  .flashcard-link:hover { background: rgba(255,255,255,0.25); }
+
+  /* Setup banner */
+  #setup-banner {
+    background: #fff8e1;
+    border-bottom: 1px solid #f0d060;
+    padding: 0.8rem 1.5rem;
+    font-size: 0.85rem;
+    color: #5a4800;
+    text-align: center;
+  }
+
+  #setup-banner code {
+    background: #f0d060;
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-family: var(--mono);
     font-size: 0.82rem;
-    font-weight: 600;
-    transition: background 0.15s;
   }
-  .flashcard-link:hover { background: rgba(255,255,255,0.3); }
 
+  /* Layout */
   main {
-    max-width: 780px;
+    max-width: 860px;
     margin: 0 auto;
-    padding: 1.5rem 1rem 3rem;
+    padding: 2rem 1.25rem;
   }
 
-  .chapter-block {
+  /* Visual Aids */
+  .visual-aids {
+    margin-bottom: 2rem;
+  }
+
+  .section-heading {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.75rem;
+  }
+
+  .visual-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .visual-card {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 10px;
-    margin-bottom: 1.25rem;
+    padding: 1rem 1.1rem;
+    text-decoration: none;
+    color: var(--text);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+
+  .visual-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 2px 8px rgba(61,90,153,0.1);
+  }
+
+  .visual-icon {
+    font-size: 1.5rem;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .visual-info strong {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+  }
+
+  .visual-info span {
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+
+  /* Chapter sections */
+  .chapter {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
     overflow: hidden;
   }
 
@@ -75,110 +161,158 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0.9rem 1.1rem;
+    padding: 1rem 1.25rem;
     cursor: pointer;
     user-select: none;
-    background: var(--surface);
     border-bottom: 1px solid transparent;
-    transition: background 0.12s;
+    transition: background 0.15s;
   }
-  .chapter-header:hover { background: #f0eee9; }
+
+  .chapter-header:hover { background: var(--accent-light); }
+
   .chapter-header.open { border-bottom-color: var(--border); }
 
-  .chapter-title { font-size: 1rem; font-weight: 600; }
-  .chapter-toggle { font-size: 0.85rem; color: var(--muted); transition: transform 0.2s; }
-  .chapter-header.open .chapter-toggle { transform: rotate(180deg); }
-
-  .chapter-body { display: none; padding: 1rem 1.1rem 1.25rem; }
-  .chapter-body.open { display: block; }
-
-  /* Visual aids section */
-  .visual-aids {
-    margin-bottom: 1.1rem;
+  .chapter-label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
   }
 
-  .visual-aids h3 {
-    font-size: 0.82rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--muted);
-    margin-bottom: 0.6rem;
+  .chapter-tag {
+    background: var(--tag-bg);
+    color: var(--tag-text);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 3px 9px;
+    border-radius: 20px;
+    white-space: nowrap;
   }
 
-  .diagram-card {
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    overflow: hidden;
-    background: #fafaf8;
-    margin-bottom: 0.6rem;
+  .chapter-title {
+    font-size: 0.97rem;
+    font-weight: 600;
+    color: var(--text);
   }
 
-  .diagram-card img {
-    width: 100%;
-    max-width: 420px;
-    display: block;
-    padding: 0.75rem;
-  }
-
-  .diagram-caption {
-    padding: 0.5rem 0.75rem 0.65rem;
+  .chapter-meta {
     font-size: 0.8rem;
     color: var(--muted);
-    border-top: 1px solid var(--border);
-    background: var(--surface);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
   }
+
+  .note-count {
+    background: var(--accent-light);
+    color: var(--accent);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 20px;
+  }
+
+  .chevron {
+    font-size: 0.8rem;
+    color: var(--muted);
+    transition: transform 0.2s;
+  }
+
+  .chevron.open { transform: rotate(180deg); }
+
+  /* Chapter body */
+  .chapter-body {
+    display: none;
+    padding: 1.25rem;
+  }
+
+  .chapter-body.open { display: block; }
 
   /* Notes list */
-  .notes-label {
-    font-size: 0.82rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--muted);
-    margin-bottom: 0.5rem;
-    margin-top: 0.25rem;
+  .notes-list {
+    margin-bottom: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
   }
 
-  .notes-list { list-style: none; margin-bottom: 1rem; }
-
-  .note-item {
+  .note-card {
+    background: var(--bg);
     border: 1px solid var(--border);
     border-radius: 7px;
-    padding: 0.65rem 0.85rem;
-    margin-bottom: 0.5rem;
-    background: #fafaf8;
-    font-size: 0.875rem;
-    line-height: 1.5;
+    padding: 0.85rem 1rem;
   }
 
   .note-meta {
-    font-size: 0.75rem;
-    color: var(--muted);
-    margin-top: 0.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.4rem;
   }
 
-  .no-notes {
-    font-size: 0.85rem;
+  .note-author {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--accent);
+  }
+
+  .note-date {
+    font-size: 0.75rem;
     color: var(--muted);
-    font-style: italic;
-    margin-bottom: 1rem;
+  }
+
+  .delete-btn {
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-size: 0.75rem;
+    cursor: pointer;
+    padding: 2px 6px;
+    border-radius: 4px;
+    transition: background 0.15s, color 0.15s;
+    line-height: 1;
+  }
+
+  .delete-btn:hover {
+    background: #fde8e8;
+    color: #c0392b;
+  }
+
+  .note-text {
+    font-size: 0.9rem;
+    color: var(--text);
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 1.5rem 1rem;
+    color: var(--muted);
+    font-size: 0.875rem;
+    border: 1px dashed var(--border);
+    border-radius: 7px;
+    margin-bottom: 1.25rem;
+  }
+
+  .loading-state {
+    text-align: center;
+    padding: 1rem;
+    color: var(--muted);
+    font-size: 0.875rem;
   }
 
   /* Add note form */
-  .add-note h4 {
-    font-size: 0.82rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--muted);
-    margin-bottom: 0.6rem;
+  .add-note-form {
+    border-top: 1px solid var(--border);
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
   }
 
   .form-row {
     display: flex;
-    gap: 0.6rem;
-    margin-bottom: 0.6rem;
+    gap: 0.65rem;
   }
 
   .form-row input {
@@ -193,6 +327,7 @@
     outline: none;
     transition: border-color 0.15s;
   }
+
   .form-row input:focus { border-color: var(--accent); }
 
   textarea.note-input {
@@ -208,8 +343,8 @@
     min-height: 80px;
     outline: none;
     transition: border-color 0.15s;
-    margin-bottom: 0.6rem;
   }
+
   textarea.note-input:focus { border-color: var(--accent); }
 
   .submit-row {
@@ -219,7 +354,10 @@
     gap: 0.75rem;
   }
 
-  .submit-hint { font-size: 0.78rem; color: var(--muted); }
+  .submit-hint {
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
 
   button.post-btn {
     background: var(--accent);
@@ -233,6 +371,7 @@
     transition: background 0.15s;
     white-space: nowrap;
   }
+
   button.post-btn:hover { background: var(--accent-hover); }
   button.post-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
@@ -245,6 +384,7 @@
     display: none;
   }
 
+  /* Footer */
   footer {
     text-align: center;
     padding: 2rem 1rem;
@@ -263,6 +403,8 @@
 </head>
 <body>
 
+
+
 <header>
   <h1>PSYC 101 — Study Hub</h1>
   <p>Shared notes from students, organized by chapter</p>
@@ -270,7 +412,31 @@
 </header>
 
 <main>
+
+  <!-- Visual Aids -->
+  <div class="visual-aids">
+    <div class="section-heading">Visual Aids</div>
+    <div class="visual-grid">
+      <a class="visual-card" href="neurotransmitter-body-map.html" target="_blank">
+        <div class="visual-icon">🧠</div>
+        <div class="visual-info">
+          <strong>Neurotransmitter Body Map</strong>
+          <span>Where each neurotransmitter acts in the body — Ch. 2</span>
+        </div>
+      </a>
+      <a class="visual-card" href="neuron-structure.png" target="_blank">
+        <div class="visual-icon">🔬</div>
+        <div class="visual-info">
+          <strong>Neuron Structure</strong>
+          <span>Dendrites, cell body, axon & myelin sheath — Ch. 2</span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Chapters will be rendered here by JS -->
   <div id="chapters-container"></div>
+
 </main>
 
 <footer>
@@ -278,6 +444,7 @@
 </footer>
 
 
+<!-- Firebase SDK -->
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
   import { getFirestore, collection, addDoc, query, where, orderBy, getDocs, serverTimestamp }
@@ -285,291 +452,228 @@
 
   // ─────────────────────────────────────────────────────────
   // 🔧 STEP 1: Replace this object with your Firebase config.
+  //    Get it from: Firebase Console → Your Project →
+  //    Project Settings → Your Apps → SDK setup → Config
   // ─────────────────────────────────────────────────────────
- const firebaseConfig = {
-  apiKey: "AIzaSyCGlhtk6i6G2l02iC1qwCBGQ3plKGEI72U",
-  authDomain: "psyc-study-hub.firebaseapp.com",
-  projectId: "psyc-study-hub",
-  storageBucket: "psyc-study-hub.firebasestorage.app",
-  messagingSenderId: "289930203679",
-  appId: "1:289930203679:web:a3168688d97cbd15e4bb2a",
-  measurementId: "G-KCZ7WS7QPW"
-};
+  const firebaseConfig = {
+    apiKey: "AIzaSyCGlhtk6i6G2l02iC1qwCBGQ3plKGEI72U",
+    authDomain: "psyc-study-hub.firebaseapp.com",
+    projectId: "psyc-study-hub",
+    storageBucket: "psyc-study-hub.firebasestorage.app",
+    messagingSenderId: "289930203679",
+    appId: "1:289930203679:web:a3168688d97cbd15e4bb2a"
+  };
 
-  const app = initializeApp(firebaseConfig);
-  const db  = getFirestore(app);
-
-  // ─────────────────────────────────────────────────────────
-  // Chapter definitions
-  // visualAids: optional array of { src, caption } for images
-  // ─────────────────────────────────────────────────────────
-  const chapters = [
-    { id: "ch1",   label: "Chapter 1 — Psychology's Story & Critical Thinking",      visualAids: [] },
-    { id: "ch2_3", label: "Chapters 2 & 3 — Neuroscience & Consciousness",
-      visualAids: [
-        {
-          svg: `<svg width="100%" viewBox="0 0 680 790" role="img" style="display:block;">
-<title>Five types of neural measures</title>
-<desc>Five panels showing EEG, MEG, PET, MRI, and fMRI with brain illustrations showing what each technique highlights.</desc>
-<defs>
-  <marker id="nmArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-    <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  </marker>
-  <clipPath id="nm-pet"><path d="M58 270 Q52 235 72 218 Q88 206 104 214 Q114 202 130 206 Q150 200 158 220 Q174 214 178 238 Q188 262 174 284 Q162 306 138 306 Q122 320 104 310 Q78 322 62 302 Q46 286 58 270Z"/></clipPath>
-  <clipPath id="nm-mri"><path d="M58 450 Q52 415 72 398 Q88 386 104 394 Q114 382 130 386 Q150 380 158 400 Q174 394 178 418 Q188 442 174 464 Q162 486 138 486 Q122 500 104 490 Q78 502 62 482 Q46 466 58 450Z"/></clipPath>
-  <clipPath id="nm-fmri"><path d="M232 648 Q226 613 246 596 Q262 584 278 592 Q288 580 304 584 Q324 578 328 598 Q344 592 348 616 Q358 640 344 662 Q332 684 308 684 Q292 698 278 688 Q252 700 236 680 Q220 664 232 648Z"/></clipPath>
-</defs>
-<!-- EEG -->
-<rect x="20" y="20" width="305" height="160" rx="10" fill="none" stroke="#534AB7" stroke-width="1"/>
-<ellipse cx="90" cy="105" rx="38" ry="46" fill="none" stroke="#888" stroke-width="1.5"/>
-<circle cx="72" cy="72" r="4" fill="#534AB7"/><circle cx="90" cy="62" r="4" fill="#534AB7"/><circle cx="108" cy="72" r="4" fill="#534AB7"/>
-<circle cx="66" cy="92" r="4" fill="#534AB7"/><circle cx="114" cy="92" r="4" fill="#534AB7"/>
-<circle cx="80" cy="82" r="3" fill="#534AB7" opacity="0.7"/><circle cx="100" cy="82" r="3" fill="#534AB7" opacity="0.7"/>
-<line x1="72" y1="72" x2="56" y2="58" stroke="#534AB7" stroke-width="0.8" opacity="0.5"/>
-<line x1="90" y1="62" x2="90" y2="45" stroke="#534AB7" stroke-width="0.8" opacity="0.5"/>
-<line x1="108" y1="72" x2="124" y2="58" stroke="#534AB7" stroke-width="0.8" opacity="0.5"/>
-<text font-family="sans-serif" font-size="14" font-weight="500" x="152" y="55" fill="#534AB7">EEG</text>
-<text font-family="sans-serif" font-size="12" x="152" y="72" fill="#222">Electroencephalogram</text>
-<text font-family="sans-serif" font-size="12" x="152" y="92" fill="#666">Electrodes on the scalp</text>
-<text font-family="sans-serif" font-size="12" x="152" y="107" fill="#666">detect electrical activity</text>
-<text font-family="sans-serif" font-size="12" x="152" y="122" fill="#666">in neurons — fast but</text>
-<text font-family="sans-serif" font-size="12" x="152" y="137" fill="#666">spatially imprecise.</text>
-<!-- MEG -->
-<rect x="355" y="20" width="305" height="160" rx="10" fill="none" stroke="#0F6E56" stroke-width="1"/>
-<ellipse cx="445" cy="108" rx="34" ry="42" fill="none" stroke="#888" stroke-width="1.5"/>
-<path d="M395 108 Q395 38 445 35 Q495 38 495 108" fill="none" stroke="#0F6E56" stroke-width="3" stroke-linecap="round"/>
-<path d="M402 108 Q402 50 445 47 Q488 50 488 108" fill="none" stroke="#0F6E56" stroke-width="1" stroke-dasharray="4 3" opacity="0.5"/>
-<text font-family="sans-serif" font-size="14" font-weight="500" x="516" y="55" fill="#0F6E56">MEG</text>
-<text font-family="sans-serif" font-size="12" x="516" y="72" fill="#222">Magnetoencephalography</text>
-<text font-family="sans-serif" font-size="12" x="516" y="92" fill="#666">A helmet-like coil records</text>
-<text font-family="sans-serif" font-size="12" x="516" y="107" fill="#666">magnetic fields from the</text>
-<text font-family="sans-serif" font-size="12" x="516" y="122" fill="#666">brain's natural electrical</text>
-<text font-family="sans-serif" font-size="12" x="516" y="137" fill="#666">currents.</text>
-<!-- PET -->
-<rect x="20" y="200" width="305" height="175" rx="10" fill="none" stroke="#BA7517" stroke-width="1"/>
-<path d="M58 270 Q52 235 72 218 Q88 206 104 214 Q114 202 130 206 Q150 200 158 220 Q174 214 178 238 Q188 262 174 284 Q162 306 138 306 Q122 320 104 310 Q78 322 62 302 Q46 286 58 270Z" fill="none" stroke="#888" stroke-width="1.5"/>
-<path d="M80 218 Q84 235 78 250" fill="none" stroke="#888" stroke-width="0.8" opacity="0.5"/>
-<path d="M110 207 Q116 225 112 242" fill="none" stroke="#888" stroke-width="0.8" opacity="0.5"/>
-<path d="M140 204 Q148 222 144 240" fill="none" stroke="#888" stroke-width="0.8" opacity="0.5"/>
-<path d="M170 224 Q172 244 166 260" fill="none" stroke="#888" stroke-width="0.8" opacity="0.5"/>
-<g clip-path="url(#nm-pet)">
-  <ellipse cx="96" cy="228" r="12" fill="#EF9F27" opacity="0.35"/><ellipse cx="130" cy="222" r="16" fill="#EF9F27" opacity="0.5"/>
-  <ellipse cx="160" cy="240" r="14" fill="#EF9F27" opacity="0.45"/><ellipse cx="148" cy="270" r="11" fill="#EF9F27" opacity="0.35"/>
-  <ellipse cx="108" cy="268" r="9" fill="#EF9F27" opacity="0.3"/><ellipse cx="76" cy="256" r="8" fill="#EF9F27" opacity="0.25"/>
-  <circle cx="130" cy="222" r="6" fill="#BA7517" opacity="0.85"/><circle cx="158" cy="240" r="5" fill="#BA7517" opacity="0.8"/>
-  <circle cx="96" cy="228" r="4" fill="#BA7517" opacity="0.7"/><circle cx="148" cy="272" r="4" fill="#BA7517" opacity="0.65"/>
-</g>
-<path d="M58 270 Q52 235 72 218 Q88 206 104 214 Q114 202 130 206 Q150 200 158 220 Q174 214 178 238 Q188 262 174 284 Q162 306 138 306 Q122 320 104 310 Q78 322 62 302 Q46 286 58 270Z" fill="none" stroke="#888" stroke-width="1.5"/>
-<line x1="68" y1="350" x2="80" y2="318" stroke="#BA7517" stroke-width="1" marker-end="url(#nmArrow)"/>
-<text font-family="sans-serif" font-size="12" x="30" y="358" fill="#BA7517">Injection</text>
-<text font-family="sans-serif" font-size="14" font-weight="500" x="200" y="225" fill="#BA7517">PET</text>
-<text font-family="sans-serif" font-size="12" x="200" y="242" fill="#222">Positron emission tomography</text>
-<text font-family="sans-serif" font-size="12" x="200" y="262" fill="#666">Radioactive glucose is injected</text>
-<text font-family="sans-serif" font-size="12" x="200" y="277" fill="#666">and tracked. Brighter spots</text>
-<text font-family="sans-serif" font-size="12" x="200" y="292" fill="#666">show areas consuming the</text>
-<text font-family="sans-serif" font-size="12" x="200" y="307" fill="#666">most glucose — highest</text>
-<text font-family="sans-serif" font-size="12" x="200" y="322" fill="#666">metabolic activity.</text>
-<!-- MRI -->
-<rect x="20" y="395" width="305" height="175" rx="10" fill="none" stroke="#185FA5" stroke-width="1"/>
-<path d="M58 450 Q52 415 72 398 Q88 386 104 394 Q114 382 130 386 Q150 380 158 400 Q174 394 178 418 Q188 442 174 464 Q162 486 138 486 Q122 500 104 490 Q78 502 62 482 Q46 466 58 450Z" fill="none" stroke="#888" stroke-width="1.5"/>
-<g clip-path="url(#nm-mri)">
-  <ellipse cx="118" cy="440" rx="42" ry="36" fill="#B5D4F4" opacity="0.45"/>
-  <ellipse cx="118" cy="440" rx="32" ry="26" fill="#E6F1FB" opacity="0.5"/>
-  <path d="M104 434 Q110 428 118 430 Q126 428 132 434 Q130 444 118 446 Q106 444 104 434Z" fill="#185FA5" opacity="0.3"/>
-  <path d="M90 438 Q118 432 146 438" fill="none" stroke="#185FA5" stroke-width="1.5" opacity="0.5"/>
-  <path d="M76 400 Q80 418 74 432" fill="none" stroke="#888" stroke-width="0.8" opacity="0.4"/>
-  <path d="M104 388 Q110 406 106 422" fill="none" stroke="#888" stroke-width="0.8" opacity="0.4"/>
-  <path d="M134 384 Q142 402 138 418" fill="none" stroke="#888" stroke-width="0.8" opacity="0.4"/>
-  <path d="M162 400 Q168 418 162 434" fill="none" stroke="#888" stroke-width="0.8" opacity="0.4"/>
-</g>
-<path d="M58 450 Q52 415 72 398 Q88 386 104 394 Q114 382 130 386 Q150 380 158 400 Q174 394 178 418 Q188 442 174 464 Q162 486 138 486 Q122 500 104 490 Q78 502 62 482 Q46 466 58 450Z" fill="none" stroke="#888" stroke-width="1.5"/>
-<line x1="86" y1="418" x2="68" y2="405" stroke="#185FA5" stroke-width="0.5" stroke-dasharray="3 2"/>
-<text font-family="sans-serif" font-size="10" x="28" y="404" fill="#185FA5">Gray</text>
-<text font-family="sans-serif" font-size="10" x="24" y="416" fill="#185FA5">matter</text>
-<line x1="118" y1="432" x2="118" y2="416" stroke="#185FA5" stroke-width="0.5" stroke-dasharray="3 2"/>
-<text font-family="sans-serif" font-size="10" x="100" y="412" fill="#185FA5">Ventricles</text>
-<line x1="148" y1="436" x2="166" y2="422" stroke="#185FA5" stroke-width="0.5" stroke-dasharray="3 2"/>
-<text font-family="sans-serif" font-size="10" x="150" y="418" fill="#185FA5">White</text>
-<text font-family="sans-serif" font-size="10" x="150" y="430" fill="#185FA5">matter</text>
-<text font-family="sans-serif" font-size="14" font-weight="500" x="200" y="408" fill="#185FA5">MRI</text>
-<text font-family="sans-serif" font-size="12" x="200" y="425" fill="#222">Magnetic resonance imaging</text>
-<text font-family="sans-serif" font-size="12" x="200" y="445" fill="#666">Magnetic fields map brain</text>
-<text font-family="sans-serif" font-size="12" x="200" y="460" fill="#666">structure in detail — gray</text>
-<text font-family="sans-serif" font-size="12" x="200" y="475" fill="#666">matter, white matter, and</text>
-<text font-family="sans-serif" font-size="12" x="200" y="490" fill="#666">ventricles all visible.</text>
-<text font-family="sans-serif" font-size="12" x="200" y="505" fill="#666">Shows anatomy, not activity.</text>
-<!-- fMRI -->
-<rect x="187" y="590" width="305" height="185" rx="10" fill="none" stroke="#A32D2D" stroke-width="1"/>
-<path d="M232 648 Q226 613 246 596 Q262 584 278 592 Q288 580 304 584 Q324 578 328 598 Q344 592 348 616 Q358 640 344 662 Q332 684 308 684 Q292 698 278 688 Q252 700 236 680 Q220 664 232 648Z" fill="#E6F1FB" stroke="#888" stroke-width="1.5"/>
-<g clip-path="url(#nm-fmri)">
-  <ellipse cx="268" cy="642" rx="52" ry="48" fill="#85B7EB" opacity="0.55"/>
-  <ellipse cx="248" cy="650" rx="20" ry="18" fill="#378ADD" opacity="0.6"/>
-  <ellipse cx="256" cy="672" rx="15" ry="12" fill="#378ADD" opacity="0.5"/>
-  <ellipse cx="242" cy="624" rx="13" ry="11" fill="#378ADD" opacity="0.45"/>
-  <ellipse cx="298" cy="628" rx="22" ry="18" fill="#F09595" opacity="0.65"/>
-  <ellipse cx="310" cy="652" rx="14" ry="12" fill="#F09595" opacity="0.55"/>
-  <ellipse cx="308" cy="618" rx="16" ry="13" fill="#E24B4A" opacity="0.85"/>
-  <ellipse cx="318" cy="642" rx="10" ry="9" fill="#E24B4A" opacity="0.75"/>
-  <ellipse cx="310" cy="614" rx="8" ry="6" fill="#791F1F" opacity="0.95"/>
-  <path d="M242 596 Q246 614 240 628" fill="none" stroke="#888" stroke-width="0.8" opacity="0.4"/>
-  <path d="M266 586 Q272 604 268 620" fill="none" stroke="#888" stroke-width="0.8" opacity="0.4"/>
-  <path d="M294 582 Q302 600 298 616" fill="none" stroke="#888" stroke-width="0.8" opacity="0.4"/>
-  <path d="M322 596 Q328 614 322 630" fill="none" stroke="#888" stroke-width="0.8" opacity="0.4"/>
-</g>
-<path d="M232 648 Q226 613 246 596 Q262 584 278 592 Q288 580 304 584 Q324 578 328 598 Q344 592 348 616 Q358 640 344 662 Q332 684 308 684 Q292 698 278 688 Q252 700 236 680 Q220 664 232 648Z" fill="none" stroke="#888" stroke-width="1.5"/>
-<rect x="206" y="700" width="12" height="16" rx="2" fill="#791F1F"/>
-<rect x="206" y="716" width="12" height="16" rx="2" fill="#E24B4A" opacity="0.85"/>
-<rect x="206" y="732" width="12" height="16" rx="2" fill="#F09595" opacity="0.8"/>
-<rect x="206" y="748" width="12" height="16" rx="2" fill="#85B7EB" opacity="0.8"/>
-<rect x="206" y="764" width="12" height="16" rx="2" fill="#378ADD" opacity="0.75"/>
-<text font-family="sans-serif" font-size="10" x="222" y="712" fill="#791F1F">High</text>
-<text font-family="sans-serif" font-size="10" x="222" y="776" fill="#185FA5">Low</text>
-<text font-family="sans-serif" font-size="10" x="222" y="756" fill="#666">blood</text>
-<text font-family="sans-serif" font-size="10" x="222" y="768" fill="#666">flow</text>
-<text font-family="sans-serif" font-size="14" font-weight="500" x="368" y="615" fill="#A32D2D">fMRI</text>
-<text font-family="sans-serif" font-size="12" x="368" y="632" fill="#222">Functional MRI</text>
-<text font-family="sans-serif" font-size="12" x="368" y="652" fill="#666">Continuous scans track</text>
-<text font-family="sans-serif" font-size="12" x="368" y="667" fill="#666">blood flow. Red = highly</text>
-<text font-family="sans-serif" font-size="12" x="368" y="682" fill="#666">active regions. Blue =</text>
-<text font-family="sans-serif" font-size="12" x="368" y="697" fill="#666">resting regions.</text>
-<text font-family="sans-serif" font-size="11" x="340" y="784" text-anchor="middle" fill="#888">MRI = brain structure · fMRI = brain activity · PET = glucose metabolism</text>
-</svg>`,
-          caption: "Types of Neural Measures — EEG, MEG, PET, MRI, and fMRI compared"
-        }
-      ]
-    },
-    { id: "ch5_6", label: "Chapters 5 & 6 — Sensation & Perception / Learning",     visualAids: [] },
-    { id: "ch7_8", label: "Chapters 7 & 8 — Memory / Thinking & Language",           visualAids: [] },
-    { id: "ch9_10",label: "Chapters 9 & 10 — Intelligence / Development",            visualAids: [] },
-    { id: "ch11_12",label:"Chapters 11 & 12 — Motivation & Emotion / Personality",  visualAids: [] },
-    { id: "ch13_14",label:"Chapters 13 & 14 — Social Psychology / Psychological Disorders", visualAids: [] },
+  // Chapter definitions — matches your course schedule
+  const CHAPTERS = [
+    { id: "ch1",    label: "Chapter 1",     title: "Thinking Critically with Psychological Science",  due: "Due Jun 7" },
+    { id: "ch2_3",  label: "Chapters 2 & 3", title: "Neuroscience & Consciousness",                   due: "Due Jun 14" },
+    { id: "ch5_6",  label: "Chapters 5 & 6", title: "Sensation & Perception / Learning",              due: "Due Jun 21" },
+    { id: "ch7_8",  label: "Chapters 7 & 8", title: "Memory / Thinking & Language",                   due: "Due Jun 28" },
+    { id: "ch9_10", label: "Chapters 9 & 10","title": "Motivation & Emotion / Developmental Psych",  due: "Due Jul 5" },
+    { id: "ch11_12",label: "Chapters 11 & 12","title": "Personality / Social Psychology",             due: "Due Jul 12" },
+    { id: "ch13_14",label: "Chapters 13 & 14","title": "Psychological Disorders / Treatment",         due: "Due Jul 19" },
+    { id: "final",  label: "Finals Review",  title: "All Chapters",                                   due: "Jul 25" },
   ];
 
-  // ─────────────────────────────────────────────────────────
-  // Build UI
-  // ─────────────────────────────────────────────────────────
+// Init Firebase — gracefully handle missing config
+  let db = null;
+  const configured = true;
+
+  if (configured) {
+    const app = initializeApp(firebaseConfig);
+    db = getFirestore(app);
+  }
+
+  // ── Render chapters ──────────────────────────────────────
   const container = document.getElementById("chapters-container");
 
-  chapters.forEach(ch => {
-    const block = document.createElement("div");
-    block.className = "chapter-block";
-
-    // Visual aids HTML
-    let visualHTML = "";
-    if (ch.visualAids && ch.visualAids.length > 0) {
-      const cards = ch.visualAids.map(v => `
-        <div class="diagram-card">
-          ${v.svg ? `<div style="padding:0.75rem">${v.svg}</div>` : `<img src="${v.src}" alt="${v.caption}" loading="lazy" style="width:100%;max-width:420px;display:block;padding:0.75rem">`}
-          <div class="diagram-caption">${v.caption}</div>
-        </div>
-      `).join("");
-      visualHTML = `<div class="visual-aids"><h3>📷 Visual Aids</h3>${cards}</div>`;
-    }
-
-    block.innerHTML = `
+  CHAPTERS.forEach(ch => {
+    const section = document.createElement("div");
+    section.className = "chapter";
+    section.innerHTML = `
       <div class="chapter-header" data-id="${ch.id}">
-        <span class="chapter-title">${ch.label}</span>
-        <span class="chapter-toggle">▼</span>
+        <div class="chapter-label">
+          <span class="chapter-tag">${ch.label}</span>
+          <span class="chapter-title">${ch.title}</span>
+        </div>
+        <div class="chapter-meta">
+          <span class="note-count" id="count-${ch.id}">0 notes</span>
+          <span style="font-size:0.8rem;color:var(--muted)">${ch.due}</span>
+          <span class="chevron" id="chev-${ch.id}">▼</span>
+        </div>
       </div>
       <div class="chapter-body" id="body-${ch.id}">
-        ${visualHTML}
-        <p class="notes-label">📝 Student Notes</p>
-        <ul class="notes-list" id="notes-${ch.id}">
-          <li class="no-notes">Loading notes…</li>
-        </ul>
-
-        <div class="add-note">
-          <h4>➕ Add a Note</h4>
+        <div class="notes-list" id="notes-${ch.id}">
+          <div class="loading-state">Loading notes…</div>
+        </div>
+        <div class="add-note-form">
           <div class="form-row">
-            <input type="text" id="name-${ch.id}" placeholder="Your name (optional)" maxlength="40">
+            <input type="text" id="name-${ch.id}" placeholder="Your name (optional)" maxlength="40"/>
           </div>
-          <textarea class="note-input" id="text-${ch.id}" placeholder="Share something helpful — a summary, memory trick, or connection…" maxlength="600"></textarea>
+          <textarea class="note-input" id="text-${ch.id}" placeholder="Add a study note, mnemonic, key concept, or tip for this chapter…" maxlength="1000"></textarea>
           <div class="submit-row">
-            <span class="submit-hint">Max 600 characters · visible to all classmates</span>
-            <button class="post-btn" id="btn-${ch.id}">Post Note</button>
+            <span class="submit-hint">Keep it helpful — no spoilers for quizzes 😄</span>
+            <div style="display:flex;align-items:center;gap:0.75rem">
+              <span class="post-success" id="success-${ch.id}">✓ Posted!</span>
+              <button class="post-btn" id="btn-${ch.id}" data-chapter="${ch.id}">Post note</button>
+            </div>
           </div>
-          <div class="post-success" id="ok-${ch.id}">✓ Note posted!</div>
         </div>
       </div>
     `;
-    container.appendChild(block);
+    container.appendChild(section);
 
     // Toggle open/close
-    block.querySelector(".chapter-header").addEventListener("click", async function () {
-      const header = this;
-      const body   = document.getElementById(`body-${ch.id}`);
-      const isOpen = body.classList.toggle("open");
-      header.classList.toggle("open", isOpen);
-      if (isOpen) await loadNotes(ch.id);
+    section.querySelector(".chapter-header").addEventListener("click", () => {
+      const body = document.getElementById(`body-${ch.id}`);
+      const header = section.querySelector(".chapter-header");
+      const chev = document.getElementById(`chev-${ch.id}`);
+      const isOpen = body.classList.contains("open");
+      body.classList.toggle("open", !isOpen);
+      header.classList.toggle("open", !isOpen);
+      chev.classList.toggle("open", !isOpen);
+      if (!isOpen) loadNotes(ch.id);
     });
 
-    // Post note
+    // Post button
     document.getElementById(`btn-${ch.id}`).addEventListener("click", () => postNote(ch.id));
   });
 
+  // ── Load notes from Firestore ────────────────────────────
   async function loadNotes(chapterId) {
-    const list = document.getElementById(`notes-${chapterId}`);
-    list.innerHTML = "<li class='no-notes'>Loading…</li>";
+    const listEl = document.getElementById(`notes-${chapterId}`);
+    const countEl = document.getElementById(`count-${chapterId}`);
+
+    if (!configured) {
+      listEl.innerHTML = `<div class="empty-state">Firebase not set up yet — notes will appear here once configured.</div>`;
+      return;
+    }
+
+    listEl.innerHTML = `<div class="loading-state">Loading…</div>`;
+
     try {
       const q = query(
         collection(db, "notes"),
         where("chapter", "==", chapterId),
-        orderBy("ts", "desc")
+        orderBy("createdAt", "desc")
       );
       const snap = await getDocs(q);
-      if (snap.empty) {
-        list.innerHTML = "<li class='no-notes'>No notes yet — be the first!</li>";
+      const notes = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+
+      countEl.textContent = `${notes.length} note${notes.length !== 1 ? "s" : ""}`;
+
+      if (notes.length === 0) {
+        listEl.innerHTML = `<div class="empty-state">No notes yet — be the first to add one!</div>`;
         return;
       }
-      list.innerHTML = "";
-      snap.forEach(doc => {
-        const d = doc.data();
-        const li = document.createElement("li");
-        li.className = "note-item";
-        const name = d.name ? d.name : "Anonymous";
-        const date = d.ts?.toDate ? d.ts.toDate().toLocaleDateString() : "";
-        li.innerHTML = `${escHtml(d.text)}<div class="note-meta">${escHtml(name)}${date ? " · " + date : ""}</div>`;
-        list.appendChild(li);
+
+      listEl.innerHTML = "";
+      notes.forEach(n => {
+        const card = document.createElement("div");
+        card.className = "note-card";
+        card.innerHTML = `
+          <div class="note-meta">
+            <span class="note-author">${escHtml(n.author || "Anonymous")}</span>
+            <div style="display:flex;align-items:center;gap:0.5rem">
+              <span class="note-date">${formatDate(n.createdAt)}</span>
+              <button class="delete-btn" data-id="${n.id}" data-chapter="${chapterId}">✕ delete</button>
+            </div>
+          </div>
+          <div class="note-text">${escHtml(n.text)}</div>
+        `;
+        listEl.appendChild(card);
+        card.querySelector(".delete-btn").addEventListener("click", () => deleteNote(n.id, chapterId));
       });
-    } catch (e) {
-      list.innerHTML = "<li class='no-notes'>Could not load notes — check Firebase config.</li>";
-      console.error(e);
+
+    } catch (err) {
+      listEl.innerHTML = `<div class="empty-state">Could not load notes. Check your Firebase setup.</div>`;
+      console.error(err);
     }
   }
 
+  // ── Post a note ──────────────────────────────────────────
   async function postNote(chapterId) {
     const nameEl = document.getElementById(`name-${chapterId}`);
     const textEl = document.getElementById(`text-${chapterId}`);
     const btn    = document.getElementById(`btn-${chapterId}`);
-    const ok     = document.getElementById(`ok-${chapterId}`);
-    const text   = textEl.value.trim();
+    const ok     = document.getElementById(`success-${chapterId}`);
+
+    const text = textEl.value.trim();
     if (!text) { textEl.focus(); return; }
 
+    if (!configured) {
+      alert("Firebase is not configured yet. Add your credentials to the firebaseConfig object in the script.");
+      return;
+    }
+
     btn.disabled = true;
+    btn.textContent = "Posting…";
+
     try {
-      await addDoc(collection(db, "notes"), {
+      const docRef = await addDoc(collection(db, "notes"), {
         chapter: chapterId,
-        name: nameEl.value.trim() || "Anonymous",
+        author: nameEl.value.trim() || "Anonymous",
         text,
-        ts: serverTimestamp()
+        createdAt: serverTimestamp()
       });
-      textEl.value = "";
+
+textEl.value = "";
       nameEl.value = "";
       ok.style.display = "inline-block";
       setTimeout(() => { ok.style.display = "none"; }, 3000);
+
+      // Reload notes for this chapter
       await loadNotes(chapterId);
-    } catch (e) {
-      alert("Could not post note. Check Firebase config.");
-      console.error(e);
+
+    } catch (err) {
+      alert("Could not post note. Check your Firebase config and Firestore rules.");
+      console.error(err);
     }
+
     btn.disabled = false;
+    btn.textContent = "Post note";
   }
 
-  function escHtml(str) {
-    return String(str)
-      .replace(/&/g,"&amp;").replace(/</g,"&lt;")
-      .replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+  // ── Delete a note ────────────────────────────────────────
+  async function deleteNote(noteId, chapterId) {
+    if (!confirm("Are you sure you want to delete this note?")) return;
+    if (!confirm("This is permanent and cannot be undone. Delete anyway?")) return;
+    try {
+      const { deleteDoc, doc } = await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js");
+      await deleteDoc(doc(db, "notes", noteId));
+await loadNotes(chapterId);
+    } catch (err) {
+      alert("Could not delete note.");
+      console.error(err);
+    }
   }
+
+  // ── Helpers ──────────────────────────────────────────────
+  function escHtml(str) {
+    return str.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+  }
+
+  function formatDate(ts) {
+    if (!ts) return "";
+    const d = ts.toDate ? ts.toDate() : new Date(ts);
+    return d.toLocaleDateString("en-US", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" });
+  }
+
 </script>
-</body>
-</html>
+
+<!--
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  🔧 FIREBASE SETUP — 5 MINUTE GUIDE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Go to https://console.firebase.google.com
+2. Click "Add project" → name it (e.g. psyc101-study-hub) → Continue
+3. Disable Google Analytics if you don't need it → Create project
+4. In the left sidebar: Build → Firestore Database → Create database
+   · Choose "Start in test mode" (allows reads/writes for 30 days — fine for class)
+   · Pick any location → Enable
+5. In the left sidebar: Project Overview ⚙️ → Project settings
+   · Scroll to "Your apps" → click </> (Web app icon)
+   · Register app (any nickname) → copy the firebaseConfig object
+6. Paste it into the firebaseConfig variable in the <script> above
