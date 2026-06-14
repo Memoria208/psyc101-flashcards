@@ -312,8 +312,133 @@
     { id: "ch2_3", label: "Chapters 2 & 3 — Neuroscience & Consciousness",
       visualAids: [
         {
-          src: "nervouse-system.png",
-          caption: "The Nervous System — CNS vs. PNS, somatic vs. autonomic, sympathetic vs. parasympathetic divisions"
+          svg: `<svg width="100%" viewBox="0 0 680 790" role="img" style="display:block;">
+<title>Five types of neural measures</title>
+<desc>Five panels showing EEG, MEG, PET, MRI, and fMRI with brain illustrations showing what each technique highlights.</desc>
+<defs>
+  <marker id="nmArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+    <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </marker>
+  <clipPath id="nm-pet"><path d="M58 270 Q52 235 72 218 Q88 206 104 214 Q114 202 130 206 Q150 200 158 220 Q174 214 178 238 Q188 262 174 284 Q162 306 138 306 Q122 320 104 310 Q78 322 62 302 Q46 286 58 270Z"/></clipPath>
+  <clipPath id="nm-mri"><path d="M58 450 Q52 415 72 398 Q88 386 104 394 Q114 382 130 386 Q150 380 158 400 Q174 394 178 418 Q188 442 174 464 Q162 486 138 486 Q122 500 104 490 Q78 502 62 482 Q46 466 58 450Z"/></clipPath>
+  <clipPath id="nm-fmri"><path d="M232 648 Q226 613 246 596 Q262 584 278 592 Q288 580 304 584 Q324 578 328 598 Q344 592 348 616 Q358 640 344 662 Q332 684 308 684 Q292 698 278 688 Q252 700 236 680 Q220 664 232 648Z"/></clipPath>
+</defs>
+<!-- EEG -->
+<rect x="20" y="20" width="305" height="160" rx="10" fill="none" stroke="#534AB7" stroke-width="1"/>
+<ellipse cx="90" cy="105" rx="38" ry="46" fill="none" stroke="#888" stroke-width="1.5"/>
+<circle cx="72" cy="72" r="4" fill="#534AB7"/><circle cx="90" cy="62" r="4" fill="#534AB7"/><circle cx="108" cy="72" r="4" fill="#534AB7"/>
+<circle cx="66" cy="92" r="4" fill="#534AB7"/><circle cx="114" cy="92" r="4" fill="#534AB7"/>
+<circle cx="80" cy="82" r="3" fill="#534AB7" opacity="0.7"/><circle cx="100" cy="82" r="3" fill="#534AB7" opacity="0.7"/>
+<line x1="72" y1="72" x2="56" y2="58" stroke="#534AB7" stroke-width="0.8" opacity="0.5"/>
+<line x1="90" y1="62" x2="90" y2="45" stroke="#534AB7" stroke-width="0.8" opacity="0.5"/>
+<line x1="108" y1="72" x2="124" y2="58" stroke="#534AB7" stroke-width="0.8" opacity="0.5"/>
+<text font-family="sans-serif" font-size="14" font-weight="500" x="152" y="55" fill="#534AB7">EEG</text>
+<text font-family="sans-serif" font-size="12" x="152" y="72" fill="#222">Electroencephalogram</text>
+<text font-family="sans-serif" font-size="12" x="152" y="92" fill="#666">Electrodes on the scalp</text>
+<text font-family="sans-serif" font-size="12" x="152" y="107" fill="#666">detect electrical activity</text>
+<text font-family="sans-serif" font-size="12" x="152" y="122" fill="#666">in neurons — fast but</text>
+<text font-family="sans-serif" font-size="12" x="152" y="137" fill="#666">spatially imprecise.</text>
+<!-- MEG -->
+<rect x="355" y="20" width="305" height="160" rx="10" fill="none" stroke="#0F6E56" stroke-width="1"/>
+<ellipse cx="445" cy="108" rx="34" ry="42" fill="none" stroke="#888" stroke-width="1.5"/>
+<path d="M395 108 Q395 38 445 35 Q495 38 495 108" fill="none" stroke="#0F6E56" stroke-width="3" stroke-linecap="round"/>
+<path d="M402 108 Q402 50 445 47 Q488 50 488 108" fill="none" stroke="#0F6E56" stroke-width="1" stroke-dasharray="4 3" opacity="0.5"/>
+<text font-family="sans-serif" font-size="14" font-weight="500" x="516" y="55" fill="#0F6E56">MEG</text>
+<text font-family="sans-serif" font-size="12" x="516" y="72" fill="#222">Magnetoencephalography</text>
+<text font-family="sans-serif" font-size="12" x="516" y="92" fill="#666">A helmet-like coil records</text>
+<text font-family="sans-serif" font-size="12" x="516" y="107" fill="#666">magnetic fields from the</text>
+<text font-family="sans-serif" font-size="12" x="516" y="122" fill="#666">brain's natural electrical</text>
+<text font-family="sans-serif" font-size="12" x="516" y="137" fill="#666">currents.</text>
+<!-- PET -->
+<rect x="20" y="200" width="305" height="175" rx="10" fill="none" stroke="#BA7517" stroke-width="1"/>
+<path d="M58 270 Q52 235 72 218 Q88 206 104 214 Q114 202 130 206 Q150 200 158 220 Q174 214 178 238 Q188 262 174 284 Q162 306 138 306 Q122 320 104 310 Q78 322 62 302 Q46 286 58 270Z" fill="none" stroke="#888" stroke-width="1.5"/>
+<path d="M80 218 Q84 235 78 250" fill="none" stroke="#888" stroke-width="0.8" opacity="0.5"/>
+<path d="M110 207 Q116 225 112 242" fill="none" stroke="#888" stroke-width="0.8" opacity="0.5"/>
+<path d="M140 204 Q148 222 144 240" fill="none" stroke="#888" stroke-width="0.8" opacity="0.5"/>
+<path d="M170 224 Q172 244 166 260" fill="none" stroke="#888" stroke-width="0.8" opacity="0.5"/>
+<g clip-path="url(#nm-pet)">
+  <ellipse cx="96" cy="228" r="12" fill="#EF9F27" opacity="0.35"/><ellipse cx="130" cy="222" r="16" fill="#EF9F27" opacity="0.5"/>
+  <ellipse cx="160" cy="240" r="14" fill="#EF9F27" opacity="0.45"/><ellipse cx="148" cy="270" r="11" fill="#EF9F27" opacity="0.35"/>
+  <ellipse cx="108" cy="268" r="9" fill="#EF9F27" opacity="0.3"/><ellipse cx="76" cy="256" r="8" fill="#EF9F27" opacity="0.25"/>
+  <circle cx="130" cy="222" r="6" fill="#BA7517" opacity="0.85"/><circle cx="158" cy="240" r="5" fill="#BA7517" opacity="0.8"/>
+  <circle cx="96" cy="228" r="4" fill="#BA7517" opacity="0.7"/><circle cx="148" cy="272" r="4" fill="#BA7517" opacity="0.65"/>
+</g>
+<path d="M58 270 Q52 235 72 218 Q88 206 104 214 Q114 202 130 206 Q150 200 158 220 Q174 214 178 238 Q188 262 174 284 Q162 306 138 306 Q122 320 104 310 Q78 322 62 302 Q46 286 58 270Z" fill="none" stroke="#888" stroke-width="1.5"/>
+<line x1="68" y1="350" x2="80" y2="318" stroke="#BA7517" stroke-width="1" marker-end="url(#nmArrow)"/>
+<text font-family="sans-serif" font-size="12" x="30" y="358" fill="#BA7517">Injection</text>
+<text font-family="sans-serif" font-size="14" font-weight="500" x="200" y="225" fill="#BA7517">PET</text>
+<text font-family="sans-serif" font-size="12" x="200" y="242" fill="#222">Positron emission tomography</text>
+<text font-family="sans-serif" font-size="12" x="200" y="262" fill="#666">Radioactive glucose is injected</text>
+<text font-family="sans-serif" font-size="12" x="200" y="277" fill="#666">and tracked. Brighter spots</text>
+<text font-family="sans-serif" font-size="12" x="200" y="292" fill="#666">show areas consuming the</text>
+<text font-family="sans-serif" font-size="12" x="200" y="307" fill="#666">most glucose — highest</text>
+<text font-family="sans-serif" font-size="12" x="200" y="322" fill="#666">metabolic activity.</text>
+<!-- MRI -->
+<rect x="20" y="395" width="305" height="175" rx="10" fill="none" stroke="#185FA5" stroke-width="1"/>
+<path d="M58 450 Q52 415 72 398 Q88 386 104 394 Q114 382 130 386 Q150 380 158 400 Q174 394 178 418 Q188 442 174 464 Q162 486 138 486 Q122 500 104 490 Q78 502 62 482 Q46 466 58 450Z" fill="none" stroke="#888" stroke-width="1.5"/>
+<g clip-path="url(#nm-mri)">
+  <ellipse cx="118" cy="440" rx="42" ry="36" fill="#B5D4F4" opacity="0.45"/>
+  <ellipse cx="118" cy="440" rx="32" ry="26" fill="#E6F1FB" opacity="0.5"/>
+  <path d="M104 434 Q110 428 118 430 Q126 428 132 434 Q130 444 118 446 Q106 444 104 434Z" fill="#185FA5" opacity="0.3"/>
+  <path d="M90 438 Q118 432 146 438" fill="none" stroke="#185FA5" stroke-width="1.5" opacity="0.5"/>
+  <path d="M76 400 Q80 418 74 432" fill="none" stroke="#888" stroke-width="0.8" opacity="0.4"/>
+  <path d="M104 388 Q110 406 106 422" fill="none" stroke="#888" stroke-width="0.8" opacity="0.4"/>
+  <path d="M134 384 Q142 402 138 418" fill="none" stroke="#888" stroke-width="0.8" opacity="0.4"/>
+  <path d="M162 400 Q168 418 162 434" fill="none" stroke="#888" stroke-width="0.8" opacity="0.4"/>
+</g>
+<path d="M58 450 Q52 415 72 398 Q88 386 104 394 Q114 382 130 386 Q150 380 158 400 Q174 394 178 418 Q188 442 174 464 Q162 486 138 486 Q122 500 104 490 Q78 502 62 482 Q46 466 58 450Z" fill="none" stroke="#888" stroke-width="1.5"/>
+<line x1="86" y1="418" x2="68" y2="405" stroke="#185FA5" stroke-width="0.5" stroke-dasharray="3 2"/>
+<text font-family="sans-serif" font-size="10" x="28" y="404" fill="#185FA5">Gray</text>
+<text font-family="sans-serif" font-size="10" x="24" y="416" fill="#185FA5">matter</text>
+<line x1="118" y1="432" x2="118" y2="416" stroke="#185FA5" stroke-width="0.5" stroke-dasharray="3 2"/>
+<text font-family="sans-serif" font-size="10" x="100" y="412" fill="#185FA5">Ventricles</text>
+<line x1="148" y1="436" x2="166" y2="422" stroke="#185FA5" stroke-width="0.5" stroke-dasharray="3 2"/>
+<text font-family="sans-serif" font-size="10" x="150" y="418" fill="#185FA5">White</text>
+<text font-family="sans-serif" font-size="10" x="150" y="430" fill="#185FA5">matter</text>
+<text font-family="sans-serif" font-size="14" font-weight="500" x="200" y="408" fill="#185FA5">MRI</text>
+<text font-family="sans-serif" font-size="12" x="200" y="425" fill="#222">Magnetic resonance imaging</text>
+<text font-family="sans-serif" font-size="12" x="200" y="445" fill="#666">Magnetic fields map brain</text>
+<text font-family="sans-serif" font-size="12" x="200" y="460" fill="#666">structure in detail — gray</text>
+<text font-family="sans-serif" font-size="12" x="200" y="475" fill="#666">matter, white matter, and</text>
+<text font-family="sans-serif" font-size="12" x="200" y="490" fill="#666">ventricles all visible.</text>
+<text font-family="sans-serif" font-size="12" x="200" y="505" fill="#666">Shows anatomy, not activity.</text>
+<!-- fMRI -->
+<rect x="187" y="590" width="305" height="185" rx="10" fill="none" stroke="#A32D2D" stroke-width="1"/>
+<path d="M232 648 Q226 613 246 596 Q262 584 278 592 Q288 580 304 584 Q324 578 328 598 Q344 592 348 616 Q358 640 344 662 Q332 684 308 684 Q292 698 278 688 Q252 700 236 680 Q220 664 232 648Z" fill="#E6F1FB" stroke="#888" stroke-width="1.5"/>
+<g clip-path="url(#nm-fmri)">
+  <ellipse cx="268" cy="642" rx="52" ry="48" fill="#85B7EB" opacity="0.55"/>
+  <ellipse cx="248" cy="650" rx="20" ry="18" fill="#378ADD" opacity="0.6"/>
+  <ellipse cx="256" cy="672" rx="15" ry="12" fill="#378ADD" opacity="0.5"/>
+  <ellipse cx="242" cy="624" rx="13" ry="11" fill="#378ADD" opacity="0.45"/>
+  <ellipse cx="298" cy="628" rx="22" ry="18" fill="#F09595" opacity="0.65"/>
+  <ellipse cx="310" cy="652" rx="14" ry="12" fill="#F09595" opacity="0.55"/>
+  <ellipse cx="308" cy="618" rx="16" ry="13" fill="#E24B4A" opacity="0.85"/>
+  <ellipse cx="318" cy="642" rx="10" ry="9" fill="#E24B4A" opacity="0.75"/>
+  <ellipse cx="310" cy="614" rx="8" ry="6" fill="#791F1F" opacity="0.95"/>
+  <path d="M242 596 Q246 614 240 628" fill="none" stroke="#888" stroke-width="0.8" opacity="0.4"/>
+  <path d="M266 586 Q272 604 268 620" fill="none" stroke="#888" stroke-width="0.8" opacity="0.4"/>
+  <path d="M294 582 Q302 600 298 616" fill="none" stroke="#888" stroke-width="0.8" opacity="0.4"/>
+  <path d="M322 596 Q328 614 322 630" fill="none" stroke="#888" stroke-width="0.8" opacity="0.4"/>
+</g>
+<path d="M232 648 Q226 613 246 596 Q262 584 278 592 Q288 580 304 584 Q324 578 328 598 Q344 592 348 616 Q358 640 344 662 Q332 684 308 684 Q292 698 278 688 Q252 700 236 680 Q220 664 232 648Z" fill="none" stroke="#888" stroke-width="1.5"/>
+<rect x="206" y="700" width="12" height="16" rx="2" fill="#791F1F"/>
+<rect x="206" y="716" width="12" height="16" rx="2" fill="#E24B4A" opacity="0.85"/>
+<rect x="206" y="732" width="12" height="16" rx="2" fill="#F09595" opacity="0.8"/>
+<rect x="206" y="748" width="12" height="16" rx="2" fill="#85B7EB" opacity="0.8"/>
+<rect x="206" y="764" width="12" height="16" rx="2" fill="#378ADD" opacity="0.75"/>
+<text font-family="sans-serif" font-size="10" x="222" y="712" fill="#791F1F">High</text>
+<text font-family="sans-serif" font-size="10" x="222" y="776" fill="#185FA5">Low</text>
+<text font-family="sans-serif" font-size="10" x="222" y="756" fill="#666">blood</text>
+<text font-family="sans-serif" font-size="10" x="222" y="768" fill="#666">flow</text>
+<text font-family="sans-serif" font-size="14" font-weight="500" x="368" y="615" fill="#A32D2D">fMRI</text>
+<text font-family="sans-serif" font-size="12" x="368" y="632" fill="#222">Functional MRI</text>
+<text font-family="sans-serif" font-size="12" x="368" y="652" fill="#666">Continuous scans track</text>
+<text font-family="sans-serif" font-size="12" x="368" y="667" fill="#666">blood flow. Red = highly</text>
+<text font-family="sans-serif" font-size="12" x="368" y="682" fill="#666">active regions. Blue =</text>
+<text font-family="sans-serif" font-size="12" x="368" y="697" fill="#666">resting regions.</text>
+<text font-family="sans-serif" font-size="11" x="340" y="784" text-anchor="middle" fill="#888">MRI = brain structure · fMRI = brain activity · PET = glucose metabolism</text>
+</svg>`,
+          caption: "Types of Neural Measures — EEG, MEG, PET, MRI, and fMRI compared"
         }
       ]
     },
@@ -338,7 +463,7 @@
     if (ch.visualAids && ch.visualAids.length > 0) {
       const cards = ch.visualAids.map(v => `
         <div class="diagram-card">
-          <img src="${v.src}" alt="${v.caption}" loading="lazy">
+          ${v.svg ? `<div style="padding:0.75rem">${v.svg}</div>` : `<img src="${v.src}" alt="${v.caption}" loading="lazy" style="width:100%;max-width:420px;display:block;padding:0.75rem">`}
           <div class="diagram-caption">${v.caption}</div>
         </div>
       `).join("");
