@@ -431,6 +431,20 @@
           <span>Dendrites, cell body, axon & myelin sheath — Ch. 2</span>
         </div>
       </a>
+      <a class="visual-card" href="nervous-system.png" target="_blank">
+        <div class="visual-icon">🫀</div>
+        <div class="visual-info">
+          <strong>The Nervous System</strong>
+          <span>Central vs. peripheral, autonomic & somatic divisions — Ch. 2</span>
+        </div>
+      </a>
+      <a class="visual-card" href="types-of-neural-measures.png" target="_blank">
+        <div class="visual-icon">📡</div>
+        <div class="visual-info">
+          <strong>Types of Neural Measures</strong>
+          <span>EEG, MEG, PET, MRI & fMRI compared — Ch. 2</span>
+        </div>
+      </a>
     </div>
   </div>
 
@@ -450,11 +464,7 @@
   import { getFirestore, collection, addDoc, query, where, orderBy, getDocs, serverTimestamp }
     from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-  // ─────────────────────────────────────────────────────────
-  // 🔧 STEP 1: Replace this object with your Firebase config.
-  //    Get it from: Firebase Console → Your Project →
-  //    Project Settings → Your Apps → SDK setup → Config
-  // ─────────────────────────────────────────────────────────
+
   const firebaseConfig = {
     apiKey: "AIzaSyCGlhtk6i6G2l02iC1qwCBGQ3plKGEI72U",
     authDomain: "psyc-study-hub.firebaseapp.com",
@@ -662,18 +672,3 @@ await loadNotes(chapterId);
 
 </script>
 
-<!--
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  🔧 FIREBASE SETUP — 5 MINUTE GUIDE
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-1. Go to https://console.firebase.google.com
-2. Click "Add project" → name it (e.g. psyc101-study-hub) → Continue
-3. Disable Google Analytics if you don't need it → Create project
-4. In the left sidebar: Build → Firestore Database → Create database
-   · Choose "Start in test mode" (allows reads/writes for 30 days — fine for class)
-   · Pick any location → Enable
-5. In the left sidebar: Project Overview ⚙️ → Project settings
-   · Scroll to "Your apps" → click </> (Web app icon)
-   · Register app (any nickname) → copy the firebaseConfig object
-6. Paste it into the firebaseConfig variable in the <script> above
